@@ -1,0 +1,7 @@
+<h1>Facilities for <%= @hotel.hotel_name %></h1>
+<%= link_to 'New Facility', new_hotel_facility_path(@hotel) %>
+<ul>
+  <% @facilities.each do |facility| %>
+    <li><%= facility.name %> <%= link_to 'Edit', edit_hotel_facility_path(@hotel, facility) %> | <%= link_to 'Delete', hotel_facility_path(@hotel, facility), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+  <% end %>
+</ul>

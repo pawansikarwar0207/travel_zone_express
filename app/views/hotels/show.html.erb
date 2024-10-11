@@ -1,0 +1,327 @@
+<div class="bravo_content mt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-9">
+        <div class="d-block d-md-flex flex-center-between align-items-start mb-2">
+          <div class="mb-3">
+            <div class="d-block d-md-flex flex-horizontal-center mb-2 mb-md-0">
+              <h4 class="font-size-23 fw-bold mb-1"><%= @hotel.hotel_name %></h4>
+            </div>
+            <div class="d-flex flex-horizontal-center font-size-14 text-gray-1">
+              <i class="fa-solid fa-location-dot mr-2 font-size-20"></i><%= @hotel.address %>
+            </div>
+          </div>
+        </div>
+
+        <div class="slider">
+          <% if @hotel.images.present? %>
+            <%= image_tag @hotel.images.first, id: 'mainImage', class: 'main-image' %>
+            <div class="thumbnails">
+              <% @hotel.images.each_with_index do |image, index| %>
+                <%= image_tag image, class: "thumbnail" %>
+              <% end %>
+            </div>
+          <% else %>
+            <p>No hotel.images available for this hotel.</p>
+          <% end %>
+        </div>
+
+
+        <% if @hotel.description.present? %>
+          <div class="position-relative border-bottom pb-3">
+            <h5 class="font-size-18 fw-bold text-dark mb-3 text-uppercase"> Description </h5>
+            <div class="description">
+              <p><%= @hotel.description %></p>
+            </div>
+          </div>
+        <% end %>
+
+        <% if @hotel.highlights.present? %>
+          <div class="position-relative border-bottom pb-3">
+            <h5 class="font-size-18 fw-bold text-dark mb-3 text-uppercase"> Highlights </h5>
+            <div class="description">
+              <p><%= simple_format(@hotel.highlights) %></p>
+            </div>
+          </div>
+        <% end %>
+        
+        <% if @hotel.property_type.present? %>
+          <div class="border-bottom py-4 position-relative property-type attr-5">
+            <h5 id="scroll-property-type" class="font-size-21 fw-bold text-dark mb-4"></h5>
+            <h5 id="scroll-specifications" class="font-size-21 fw-bold text-dark mb-4"> Property type </h5>
+            <ul class="list-group list-group-borderless list-group-horizontal list-group-flush no-gutters row">
+              <li class="col-md-4 mb-5 list-group-item py-0">
+                <i class="fa-solid fa-circle-check mr-3 text-primary font-size-24"></i><%= @hotel.property_type %>
+              </li>
+            </ul>
+          </div>
+        <% end %>
+
+        <% if @hotel.facilities.present? %>
+          <div class="border-bottom py-4 position-relative facilities-1 attr-6">
+            <h5 id="scroll-facilities-1" class="font-size-21 fw-bold text-dark mb-4"></h5>
+            <h5 id="scroll-specifications" class="font-size-21 fw-bold text-dark mb-4"> Facilities </h5>
+              <ul class="list-group list-group-borderless list-group-horizontal list-group-flush no-gutters row">
+                <% @hotel.facilities.each do |facility| %>
+                  <li class="col-md-4 mb-5 list-group-item py-0">
+                    <i class="fa-solid fa-circle-check mr-3 text-primary font-size-24"></i><%= facility.name %>
+                  </li>
+                <% end %>
+              </ul>
+          </div>
+        <% end %>
+
+        <% if @hotel.hotel_services.present? %>
+          <div class="border-bottom py-4 position-relative hotel-service attr-7">
+            <h5 id="scroll-hotel-service" class="font-size-21 fw-bold text-dark mb-4"></h5>
+            <h5 id="scroll-specifications" class="font-size-21 fw-bold text-dark mb-4"> Hotel Service </h5>
+              <ul class="list-group list-group-borderless list-group-horizontal list-group-flush no-gutters row">
+                <% @hotel.hotel_services.each do |hotel_service| %>
+                  <li class="col-md-4 mb-5 list-group-item py-0">
+                    <i class="fa-solid fa-circle-check mr-3 text-primary font-size-24"></i><%= hotel_service.name %>
+                  </li>
+                <% end %>
+              </ul>
+          </div>
+        <% end %>
+
+        <% if @hotel.hotel_rules.present? %>
+          <div class="border-bottom py-4 position-relative hotel-service attr-7">
+            <h5 id="scroll-hotel-service" class="font-size-21 fw-bold text-dark mb-4"></h5>
+            <h5 id="scroll-specifications" class="font-size-21 fw-bold text-dark mb-4"> Hotel Rules - Policies </h5>
+              <ul class="list-group list-group-borderless list-group-horizontal list-group-flush no-gutters row">
+                <% @hotel.hotel_rules.each do |hotel_rule| %>
+                  <li class="col-md-4 mb-5 list-group-item py-0">
+                    <i class="fa-solid fa-circle-check mr-3 text-primary font-size-24"></i>
+                    <%= hotel_rule.name %> - <%= hotel_rule.description %>
+                  </li>
+                <% end %>
+              </ul>
+          </div>
+        <% end %>
+
+        <% if @hotel.reviews.any? %>
+          <% @hotel.reviews.each do |review| %>
+            <div class="row my-4">
+              <div class="col-md-4">
+                <div class="rating-box">
+                  <% avg_rating = review.rating %>
+                  <div class="rating-value fw-bold"><%= avg_rating %>.0<span class="small fw-bold">/5</span></div>
+                  <div class="rating-text">
+                    <% case avg_rating %>
+                      <% when 4.5..5 %>
+                        Excellent
+                      <% when 3.5..4.4 %>
+                        Very Good
+                      <% when 2.5..3.4 %>
+                        Average
+                      <% when 1.5..2.4 %>
+                        Poor
+                      <% else %>
+                        Terrible
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+
+      </div>
+      <div class="col-md-12 col-lg-3">
+        <div class="mb-4">
+          <div class="flex-horizontal-center">
+            <ul class="ml-n1 list-group list-group-borderless list-group-horizontal custom-social-share">
+              <li class="list-group-item px-1 py-0">
+                <div class="service-wishlist " data-id="10" data-type="hotel">
+                  <span class="height-45 width-45 border rounded border-width-2 flex-content-center cursor-pointer">
+                    <i class="fa-regular fa-heart font-size-18"></i>
+                  </span>
+                </div>
+              </li>
+            </ul>
+            <div class="flex-horizontal-center ml-2">
+              <% if @hotel.reviews.any? %>
+                <% @hotel.reviews.each do |review| %>
+                  <div class="badge-primary rounded-xs px-1">
+                   <% avg_rating = review.rating %>
+                    <span class="badge font-size-18 px-2 py-2 mb-0 text-lh-inherit"><%= avg_rating %>.0/5 </span>
+                  </div>
+                  <div class="ml-2 text-lh-1">
+                    <div class="ml-1">
+                      <h4 class="text-primary font-size-14 fw-bold mb-0">
+                        <div class="rating-text">
+                          <% case avg_rating %>
+                            <% when 4.5..5 %>
+                              Excellent
+                            <% when 3.5..4.4 %>
+                              Very Good
+                            <% when 2.5..3.4 %>
+                              Average
+                            <% when 1.5..2.4 %>
+                              Poor
+                            <% else %>
+                              Terrible
+                          <% end %>
+                        </div>
+                      </h4>
+                      <span class="text-gray-1 font-size-12">( <%= @hotel.reviews.count %> Reviews )</span>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <div class="border border-color-7 rounded mb-5">
+            <div class="border-bottom">
+              <div class="p-4">
+                <span class="font-size-14">From</span>
+                <span class="font-size-24 text-gray-6 fw-bold ml-1">
+                  <small class="font-size-16 text-decoration-line-through text-danger"></small><%= @hotel.price_per_night %><span class="font-size-14"> / night</span>
+                </span>
+              </div>
+            </div>
+            <div class="p-3">
+              <div class="px-2 pt-2">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="owner-info widget-box">
+          <div class="media">
+            <div class="media-left">
+              <a href="https://travel.zone.express/profile/btanagras03" target="_blank" class="avatar-cover" style="background-image: url('https://travel.zone.express/images/avatar.png')"></a>
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading">
+                <a class="author-link" href="https://travel.zone.express/profile/btanagras03" target="_blank">Hotel Created On</a>
+                <img data-toggle="tooltip" data-placement="top" src="https://travel.zone.express/icon/ico-not-vefified-1.svg" title="" alt="Verified" data-original-title="Not verified">
+              </h4>
+              <p><%= @hotel.created_at %></p>
+            </div>
+          </div>
+        </div>
+        <div class="border border-color-7 rounded p-4 mb-5 mt-5">
+          <h6 class="font-size-17 fw-bold text-gray-3 mx-1 mb-3 pb-1"> Why Book With Us? </h6>
+          <div class="d-flex align-items-center mt-3">
+            <i class="fa-solid fa-star font-size-25 text-primary mr-3 pr-1"></i>
+            <h6 class="mb-0 font-size-14 text-gray-1">
+              <a href="#">No-hassle best price guarantee</a>
+            </h6>
+          </div>
+          <div class="d-flex align-items-center mt-3">
+            <i class="fa-solid fa-phone-volume font-size-25 text-primary mr-3 pr-1"></i>
+            <h6 class="mb-0 font-size-14 text-gray-1">
+              <a href="#">Customer care available 24/7</a>
+            </h6>
+          </div>
+          <div class="d-flex align-items-center mt-3">
+            <i class="fa-solid fa-heart font-size-25 text-primary mr-3 pr-1"></i>
+            <h6 class="mb-0 font-size-14 text-gray-1">
+              <a href="#">Hand-picked Tours &amp; Activities</a>
+            </h6>
+          </div>
+          <div class="d-flex align-items-center mt-3">
+             <i class="fa-solid fa-plane font-size-25 text-primary mr-3 pr-1"></i>
+            <h6 class="mb-0 font-size-14 text-gray-1">
+              <a href="#">Free Travel Insureance</a>
+            </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style type="text/css">
+  .slider {
+    position: relative;
+    width: 950px;
+    margin: auto;
+  }
+
+  .main-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+  }
+
+  .thumbnails {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .thumbnails img {
+    width: 150px;
+    height: auto;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .thumbnails img:last-child {
+    margin-right: 0;
+  }
+
+  .thumbnail.active {
+    border: 2px solid #f00;
+  }
+
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.5);
+    user-select: none;
+  }
+
+  .next {
+    right: 0;
+  }
+
+  .prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .rating-box {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    text-align: center;
+  }
+  .rating-value {
+    font-size: 2.5rem;
+    color: #f1c40f;
+  }
+  .rating-text {
+    font-size: 1.25rem;
+    color: #333;
+  }
+  .rating-count {
+    color: #999;
+  }
+  .rating-bar {
+    height: 8px;
+    background-color: #f1c40f;
+    border-radius: 4px;
+  }
+  .rating-bar-bg {
+    height: 8px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+  }
+  .rating-label {
+    color: #333;
+  }
+  .rating-number {
+    color: #f1c40f;
+  }
+</style>

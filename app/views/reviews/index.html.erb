@@ -1,0 +1,81 @@
+<div class="container mt-5">
+  <h1>Reviews for : <%= @hotel.hotel_name %></h1>
+
+  <!-- Check if the current user has already reviewed this hotel -->
+  <% if @hotel.reviews.exists?(user_id: current_user.id) %>
+    <p>You have already reviewed this hotel.</p>
+  <% else %>
+    <%= link_to 'Write a Review', new_hotel_review_path(@hotel), class: "btn btn-primary" %>
+  <% end %>
+
+  <!-- Display reviews for this hotel -->
+  <% if @reviews.any? %>
+    <% @reviews.each do |review| %>
+      <div class="row my-4">
+        <div class="col-md-4">
+          <div class="rating-box">
+            <!-- Display review rating -->
+            <div class="rating-value"><%= review.rating %><span class="small">/5</span></div>
+
+            <!-- Display rating text based on score -->
+            <div class="rating-text">
+              <% case review.rating %>
+                <% when 4.5..5 %>
+                  Excellent
+                <% when 3.5..4.4 %>
+                  Very Good
+                <% when 2.5..3.4 %>
+                  Average
+                <% when 1.5..2.4 %>
+                  Poor
+                <% else %>
+                  Terrible
+              <% end %>
+            </div>
+
+            <!-- Show reviewer and comment -->
+            <div class="rating-count">Reviewed by User ID: <%= review.user.id %></div>
+            <div class="rating-comment">Comment: <%= review.comment %></div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No reviews available for this hotel.</p>
+  <% end %>
+</div>
+
+<style>
+  .rating-box {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    text-align: center;
+  }
+  .rating-value {
+    font-size: 2.5rem;
+    color: #f1c40f;
+  }
+  .rating-text {
+    font-size: 1.25rem;
+    color: #333;
+  }
+  .rating-count {
+    color: #999;
+  }
+  .rating-bar {
+    height: 8px;
+    background-color: #f1c40f;
+    border-radius: 4px;
+  }
+  .rating-bar-bg {
+    height: 8px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+  }
+  .rating-label {
+    color: #333;
+  }
+  .rating-number {
+    color: #f1c40f;
+  }
+</style>

@@ -1,0 +1,9 @@
+<h1>Hotel Services for <%= @hotel.hotel_name %></h1>
+<%= link_to 'New Hotel Rules', new_hotel_hotel_rule_path(@hotel) %>
+<ul>
+  <% @hotel_rules.each do |rule| %>
+    <li><%= rule.name %> <br>
+        <%= simple_format(rule.description) %> <br>
+     <%= link_to 'Edit', edit_hotel_hotel_rule_path(@hotel, rule) %> | <%= link_to 'Delete', hotel_hotel_rule_path(@hotel, rule), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+  <% end %>
+</ul>

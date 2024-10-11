@@ -1,0 +1,234 @@
+<nav class="container navbar navbar-expand-md navbar-light rounded-0">
+  <div class="top-bar d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center fw-bold">
+      <a href="#" class="text-white">
+       <i class="fab fa-facebook-f">
+       </i>
+      </a>
+      <a href="#" class="text-white">
+       <i class="fab fa-linkedin-in">
+       </i>
+      </a>
+      <a href="#" class="text-white border-right">
+       <i class="fab fa-google-plus-g mx-1">
+       </i>
+      </a>
+      <span>
+       travel@zone.express
+      </span>
+     </div>
+    </div>
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item mt-3">
+          <a href="#" class="border-right text-white fs-6">
+            <i class="fas fa-phone-alt"></i><span class="mx-1">639190967407</span>
+          </a>
+        </li>
+        <li class="nav-item active mt-3">
+         <a href="#" class="border-right text-white">
+           PHP
+           <i class="fas fa-caret-down mx-1">
+           </i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <div class="dropdown border-right mt-3 fs-6">
+            <a class="dropdown-toggle mx-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="flag-icon flag-icon-gb"></span>
+              English
+            </a>
+            <ul class="dropdown-menu bg-white rounded-0 bg-white border">
+              <li><a class="dropdown-item fw-bold" href="#"><span class="flag-icon flag-icon-jp mr-2"></span>Japanese</a></li>
+              <li><a class="dropdown-item fw-bold" href="#"><span class="flag-icon flag-icon-ph mr-2"></span>Filipino</a></li>
+              <li><a class="dropdown-item fw-bold" href="#"><span class="flag-icon flag-icon-eg mr-2"></span>Egyptian</a></li>
+              <li><a class="dropdown-item fw-bold" href="#"><span class="flag-icon flag-icon-de mr-2"></span>Deutsch</a></li>
+               <li><a class="dropdown-item fw-bold" href="#"><span class="flag-icon flag-icon-jp mr-2"></span>Japanese</a></li>
+              <li><a class="dropdown-item fw-bold" href="#"><span class="flag-icon flag-icon-eg mr-2"></span>Egyptian</a></li>
+            </ul>
+          </div> 
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link active dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <% if current_user.present? %>
+                <% #if current_user.profile_picture.attached?  %>
+                  <%#= image_tag current_user.profile_picture, class: 'rounded-circle', alt: 'User Avatar', height:"30", width:"30" %>
+                <%# else %>
+                  <img alt="Profile picture placeholder" height="30" src="https://storage.googleapis.com/a1aa/image/jed55Xb2pTXQA6deohLNwe2jvjqoa7HqClQTTdbTedr7VQROB.jpg" width="30", class="rounded-circle">
+                <%# end %>
+              <% end %> 
+              <span class="ms-2 text-white"><%= current_user.email %></span>
+            </a>
+            <ul class="dropdown-menu bg-white rounded-0" aria-labelledby="userDropdown">
+              <li class="dropdown-item-text"><%= current_user.email %></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><%= link_to 'My Profile', 'javascript:void(0)' , class: 'dropdown-item' %></li>
+              <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'dropdown-item' %></li>
+            </ul>
+          </li>
+        <% else %>
+          <ul class="navbar-nav ms-auto mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link active dropdown-toggle d-flex align-items-center text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-regular fa-user mx-1"></i> Sign In or Register
+              </a>
+              <ul class="dropdown-menu bg-white rounded-0 dropdown-menu-end mt-1">
+                <li>
+                  <%= link_to 'Sign In', new_user_session_path, class: 'dropdown-item' %>
+                </li>
+                <li>
+                  <%= link_to 'Register', new_user_registration_path, class: 'dropdown-item' %>
+                </li>
+                <li>
+                  <%#= button_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, data: { turbo: false }, class: 'dropdown-item' %>
+                </li> 
+              </ul>
+            </li>
+          </ul>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light rounded-0">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="/">Zone Express</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarRightAlignExample" aria-controls="navbarRightAlignExample" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarRightAlignExample">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <div class="dropdown mt-3 mx-3 fw-bold">
+          <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            HOME
+          </a>
+          <ul class="dropdown-menu bg-white rounded-0">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown mt-3 mx-3 fw-bold">
+          <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            HOTEL
+          </a>
+          <ul class="dropdown-menu bg-white rounded-0">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown mt-3 mx-3 fw-bold">
+          <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            TOUR
+          </a>
+          <ul class="dropdown-menu bg-white rounded-0">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown mt-3 mx-3 fw-bold">
+          <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            SPACE
+          </a>
+          <ul class="dropdown-menu bg-white rounded-0">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown mt-3 mx-3 fw-bold">
+          <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            CAR
+          </a>
+          <ul class="dropdown-menu bg-white rounded-0">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown mt-3 mx-3 fw-bold">
+          <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            EVENT
+          </a>
+          <ul class="dropdown-menu bg-white rounded-0">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown mt-3 mx-3 fw-bold">
+          <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            FLIGHT
+          </a>
+          <ul class="dropdown-menu bg-white rounded-0">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown mt-3 mx-3 fw-bold">
+          <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            BOAT
+          </a>
+          <ul class="dropdown-menu bg-white rounded-0">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown mt-3 mx-3 fw-bold g-0">
+          <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            PAGES
+          </a>
+          <ul class="dropdown-menu bg-white rounded-0 g-0">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .top-bar {
+    padding: 10px 0;
+  }
+  .top-bar a {
+    color: #6c757d;
+    margin-right: 15px;
+  }
+  .top-bar a:hover {
+    color: #343a40;
+  }
+  .navbar-brand {
+    font-size: 26px;
+    font-weight: bold;
+  }
+  .navbar-nav .nav-link {
+    color: black;
+    font-weight: 700;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  .navbar-nav .nav-link:hover {
+    color: #007bff;
+  }
+</style>

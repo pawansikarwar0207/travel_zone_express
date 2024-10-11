@@ -1,0 +1,7 @@
+<h1>Hotel Services for <%= @hotel.hotel_name %></h1>
+<%= link_to 'New Service', new_hotel_hotel_service_path(@hotel) %>
+<ul>
+  <% @hotel_services.each do |service| %>
+    <li><%= service.name %> <%= link_to 'Edit', edit_hotel_hotel_service_path(@hotel, service) %> | <%= link_to 'Delete', hotel_hotel_service_path(@hotel, service), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+  <% end %>
+</ul>

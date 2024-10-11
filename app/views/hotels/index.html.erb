@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-lg-4 col-xl-3 col-md-12">
+      <div class="card mt-5 rounded-0">
+        <div class="card-body">
+
+         <div class="container mt-5">
+          <div class="search-box">
+              <div class="section">
+                  <div class="title">Location</div>
+                  <div class="content"><i class="fas fa-map-marker-alt"></i> Where are you going?</div>
+              </div>
+              <div class="section">
+                  <div class="title">Check In - Out</div>
+                  <div class="content"><i class="fas fa-calendar-alt"></i> 09/23/2024 - 09/24/2024</div>
+              </div>
+              <div class="section">
+                  <div class="title">Guests</div>
+                  <div class="content"><i class="fas fa-user-friends"></i> 1 Adult - 0 Child <i class="fas fa-chevron-down"></i></div>
+              </div>
+              <button class="btn btn-search"><i class="fas fa-search"></i> Search</button>
+          </div>
+      </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8 col-xl-9 col-md-12">
+      <div class="bravo-list-item">
+        <div class="d-flex justify-content-between align-items-center mb-4 topbar-search">
+          <h3 class="font-size-21 mx-3 fw-bold mb-0 text-lh-1 result-count"> <%= @hotels.count %> hotels found </h3>
+        </div>
+        <div class="col-lg-12 col-md-12 mt-3">
+          <% @hotels.each do |hotel| %>
+            <li class="card mb-5 overflow-hidden inner-loop-wrap rounded-0">
+              <div class="product-item__outer w-100">
+                <div class="row">
+                  <div class="col-md-5 col-xl-4">
+                    <div class="product-item__header">
+                      <div class="position-relative">
+                        <a href="#" class="d-block">
+                          <% if hotel.images.present? %>
+                            <%= image_tag hotel.images.first, id: 'mainImage', class: 'min-height-230 bg-img-hero card-img-top' %>
+                            <% end %>
+                          <%# <img class="min-height-230 bg-img-hero card-img-top" src="https://travel.zone.express/uploads/mytravel/space/space-2.jpg"> %>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-7 col-xl-5 col-wd-4gdot5 flex-horizontal-center">
+                    <div class="w-100 position-relative m-4 m-md-0 has-skeleton">
+                      <%= link_to hotel_path(hotel) do %>
+                        <span class="font-weight-medium font-size-17 text-dark d-flex mb-1"><%= hotel.hotel_name %> </span>
+                        <% end %>
+                      <div class="card-body p-0">
+                        <div class="d-flex flex-wrap flex-xl-nowrap align-items-center font-size-14 text-gray-1">
+                          <i class="fa-solid fa-location-dot mr-2 font-size-20"></i> <%= hotel.address %>
+                        </div>
+                        <span class="attr-title mb-1 d-block">
+                          <i class="fa-solid fa-medal"></i> Facilities: </span>
+                        <ul class="list-unstyled mb-2 d-flex flex-lg-wrap flex-xl-wrap">
+                          
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col col-xl-3 col-wd-3gdot5 align-self-center py-4 py-xl-0 border-top border-xl-top-0">
+                    <div class="border-xl-left ml-4 ml-xl-0 pr-xl-3 pr-wd-5 text-xl-right justify-content-xl-end rtl-pr-0 rtl-pl-wd-5 rtl-border-xl-left-0 rtl-border-xl-right">
+                      <div class="mb-0">
+                        <span class="mr-1 font-size-14 text-gray-1">from</span>
+                        <span class="font-weight-bold"><%= hotel.price_per_night %></span>
+                        <span class="font-size-14 text-gray-1"> / night</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+    .search-box {
+        border-radius: 5px;
+        background-color: #fff;
+    }
+    .search-box .section {
+        margin-bottom: 20px;
+    }
+    .search-box .section:last-child {
+        margin-bottom: 0;
+    }
+    .search-box .section i {
+        color: #ffc107;
+        margin-right: 10px;
+    }
+    .search-box .section .title {
+        font-size: 14px;
+        color: #6c757d;
+        margin-bottom: 5px;
+    }
+    .search-box .section .content {
+        font-size: 16px;
+        font-weight: bold;
+        color: #212529;
+    }
+    .search-box .btn-search {
+        background-color: #ffc107;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        width: 100%;
+    }
+</style>

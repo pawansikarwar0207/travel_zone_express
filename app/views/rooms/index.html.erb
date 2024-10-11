@@ -1,0 +1,7 @@
+<h1>Rooms for <%= @hotel.hotel_name %></h1>
+<%= link_to 'New Room', new_hotel_room_path(@hotel) %>
+<ul>
+  <% @rooms.each do |room| %>
+    <li><%= room.room_type %> - $<%= room.price_per_night %> <%= link_to 'Edit', edit_hotel_room_path(@hotel, room) %> | <%= link_to 'Delete', hotel_room_path(@hotel, room), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+  <% end %>
+</ul>
