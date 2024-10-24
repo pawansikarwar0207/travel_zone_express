@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-lg-4 col-xl-3 col-md-12">
+      <div class="card mt-5 rounded-0">
+        <div class="card-body">
+
+         <div class="container mt-5">
+          <div class="search-box">
+              <div class="section">
+                  <div class="title">Location</div>
+                  <div class="content"><i class="fas fa-map-marker-alt"></i> Where are you going?</div>
+              </div>
+              <div class="section">
+                  <div class="title">From - To</div>
+                  <div class="content"><i class="fas fa-calendar-alt"></i> 09/23/2024 - 09/24/2024</div>
+              </div>
+              <button class="btn btn-search"><i class="fas fa-search"></i> Search</button>
+          </div>
+      </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8 col-xl-9 col-md-12">
+      <div class="bravo-list-item">
+        <div class="d-flex justify-content-between align-items-center mb-4 topbar-search">
+          <h3 class="font-size-21 mx-3 fw-bold mb-0 text-lh-1 result-count"> <%= @cars.count %> Cars found </h3>
+        </div>
+
+        <div class="row">
+          <% @cars.each do |car| %>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+              <div class="card h-100 shadow-lg border-0 rounded overflow-hidden">
+                <% if car.photo.attached? %>
+                  <%= image_tag car.photo.variant(resize_to_limit: [300, 200]), class: 'card-img-top', alt: "#{car.name} photo" %>
+                <% else %>
+                  <img src="/path/to/default-image.jpg" class="card-img-top" alt="No image available">
+                <% end %>
+
+                <div class="card-body">
+                  <h5 class="card-title fw-bold"><%= car.name %> - <%= car.brand %></h5>
+                  <p class="card-text text-muted">Price per day: <%= number_to_currency(car.price_per_day) %></p>
+                  <%= link_to 'View Car', car_path(car), class: 'btn btn-primary view-car-btn' %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-img-top {
+    object-fit: cover;
+    height: 200px;
+  }
+  
+  .view-car-btn {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  /* Button hover color change */
+  .view-car-btn:hover {
+    background-color: #0056b3 !important; /* Ensure the color change works with !important */
+    color: #fff; /* Ensure the text color remains white */
+    transform: translateY(-2px);
+  }
+</style>
+<style>
+    .search-box {
+        border-radius: 5px;
+        background-color: #fff;
+    }
+    .search-box .section {
+        margin-bottom: 20px;
+    }
+    .search-box .section:last-child {
+        margin-bottom: 0;
+    }
+    .search-box .section i {
+        color: #ffc107;
+        margin-right: 10px;
+    }
+    .search-box .section .title {
+        font-size: 14px;
+        color: #6c757d;
+        margin-bottom: 5px;
+    }
+    .search-box .section .content {
+        font-size: 16px;
+        font-weight: bold;
+        color: #212529;
+    }
+    .search-box .btn-search {
+        background-color: #ffc107;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        width: 100%;
+    }
+</style>

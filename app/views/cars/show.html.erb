@@ -1,0 +1,79 @@
+<div class="container mt-5">
+  <div class="row">
+    <!-- Car Image Section -->
+    <div class="col-md-6">
+      <% if @car.photo.attached? %>
+        <%= image_tag @car.photo.variant(resize_to_limit: [600, 400]).processed, class: 'img-fluid rounded shadow' %>
+      <% else %>
+        <p>No image available</p>
+      <% end %>
+    </div>
+
+    <!-- Car Information Section -->
+    <div class="col-md-6">
+      <h1 class="fw-bold"><%= @car.name %> - <%= @car.brand %></h1>
+      <p class="text-muted">Price per day: <strong><%= number_to_currency(@car.price_per_day) %></strong></p>
+
+      <% if @car.available %>
+        <%= button_to 'Book Now', book_car_path(@car), method: :patch, class: 'btn btn-success mb-3' %>
+      <% else %>
+        <p class="text-danger">This car is already booked.</p>
+      <% end %>
+
+      <!-- Car Specifications -->
+      <h3 class="mt-4">Specifications</h3>
+      <ul class="list-unstyled">
+        <li><strong>Make:</strong> Honda</li>
+        <li><strong>Model:</strong> Class C</li>
+        <li><strong>Year:</strong> 2019</li>
+        <li><strong>Mileage:</strong> 120,556 km</li>
+        <li><strong>VIN:</strong> KLJLKJLKJFDF1</li>
+        <li><strong>Version:</strong> 2.0 Turbo</li>
+        <li><strong>Horsepower:</strong> 200 hp</li>
+        <li><strong>Transmission:</strong> Auto</li>
+        <li><strong>Drive:</strong> Rear</li>
+        <li><strong>Condition:</strong> New</li>
+        <li><strong>Warranty:</strong> Yes</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Car Description Section -->
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <h3>Description</h3>
+      <p class="text-justify">
+        Libero sem vitae sed donec conubia integer nisi integer rhoncus imperdiet orci odio libero est integer a integer tincidunt sollicitudin blandit fusce nibh leo vulputate lobortis egestas dapibus faucibus metus conubia maecenas cras potenti cum hac arcu rhoncus nullam eros dictum torquent integer cursus bibendum sem sociis molestie tellus purus.
+      </p>
+    </div>
+  </div>
+
+  <!-- Car Highlights Section -->
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <h3>Highlights</h3>
+      <ul class="list-group">
+        <li class="list-group-item">Visit the Museum of Modern Art in Manhattan</li>
+        <li class="list-group-item">See amazing works of contemporary art, including Vincent van Gogh's The Starry Night</li>
+        <li class="list-group-item">Check out Campbell's Soup Cans by Warhol and The Dance (I) by Matisse</li>
+        <li class="list-group-item">Behold masterpieces by Gauguin, Dali, Picasso, and Pollock</li>
+        <li class="list-group-item">Enjoy free audio guides available in English, French, German, Italian, Spanish, Portuguese</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Car Features Section -->
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <h3>Car Features</h3>
+      <ul class="list-group">
+        <li class="list-group-item">Airbag</li>
+        <li class="list-group-item">FM Radio</li>
+        <li class="list-group-item">Power Windows</li>
+        <li class="list-group-item">Sensor</li>
+        <li class="list-group-item">Speed Km</li>
+        <li class="list-group-item">Steering Wheel</li>
+      </ul>
+    </div>
+  </div>
+</div>

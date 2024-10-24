@@ -15,4 +15,9 @@ Rails.application.routes.draw do
     resources :hotel_rules
     resources :reviews
   end
+  resources :cars, only: [:index, :show] do
+    member do
+      patch 'book'
+    end
+  end  
 end

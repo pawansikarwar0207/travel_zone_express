@@ -9,13 +9,48 @@
 require 'faker'
 
 10.times do
-  Hotel.create!(
+  hotel = Hotel.create!(
     hotel_name: Faker::Company.name,
     description: Faker::Lorem.paragraph(sentence_count: 3),
     address: Faker::Address.full_address,
-    facilities: Faker::Lorem.words(number: 3).join(', '),
-    hotel_services: Faker::Lorem.words(number: 3).join(', '),
     contact_number: Faker::PhoneNumber.phone_number,
-    price_per_night: Faker::Commerce.price(range: 100..700, as_string: true)
+    price_per_night: Faker::Commerce.price(range: 100..700, as_string: true),
+    property_type: Faker::Company.industry,
+    highlights: Faker::Lorem.sentence
   )
+
+  # Add facilities associated with the hotel
+  3.times do
+    hotel.facilities.create!(
+      name: Faker::Lorem.word
+    )
+  end
+
+  # Add services associated with the hotel
+  3.times do
+    hotel.hotel_services.create!(
+      name: Faker::Lorem.word
+    )
+  end
+end
+
+# db/seeds.rb
+
+10.times do |index|
+  car = Car.create(
+    name: Faker::Vehicle.make_and_model,
+    brand: Faker::Vehicle.manufacturer,
+    model: Faker::Vehicle.model,
+    price_per_day: Faker::Commerce.price(range: 50..300),
+    available: [true, false].sample
+  )
+
+  file_path = Rails.root.join('app', 'assets', 'images', "car#{index + 1}.jpg") # Ensure the extension is correct
+
+  if File.exist?(file_path)
+    car.photo.attach(io: File.open(file_path), filename: "car#{index + 1}.jpg")
+    puts "Attached photo to Car #{car.id}" # Optional: Print a confirmation
+  else
+    puts "File not found: #{file_path}" # Log if the file does not exist
+  end
 end
