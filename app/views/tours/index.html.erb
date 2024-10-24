@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-lg-4 col-xl-3 col-md-12">
+      <div class="card mt-5 rounded-0">
+        <div class="card-body">
+
+         <div class="container mt-5">
+          <div class="search-box">
+              <div class="section">
+                  <div class="title">Location</div>
+                  <div class="content"><i class="fas fa-map-marker-alt"></i> Where are you going?</div>
+              </div>
+              <div class="section">
+                  <div class="title">From - To</div>
+                  <div class="content"><i class="fas fa-calendar-alt"></i> 09/23/2024 - 09/24/2024</div>
+              </div>
+              <button class="btn btn-search"><i class="fas fa-search"></i> Search</button>
+          </div>
+      </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8 col-xl-9 col-md-12">
+      <div class="bravo-list-item">
+        <div class="d-flex justify-content-between align-items-center mb-4 topbar-search">
+          <h3 class="font-size-21 mx-3 fw-bold mb-0 text-lh-1 result-count"> <%= @tours.count %> Tour found </h3>
+        </div>
+          <div class="tour-container">
+            <div class="tour-cards">
+              <% @tours.each do |tour| %>
+                <div class="tour-card">
+                  <div class="tour-image">
+                    <%= image_tag(tour.image.present? ? tour.image : 'default_image.png', alt: "Tour Image", class: 'tour-image') %>
+                  </div>
+                  <div class="tour-content">
+                    <h2><%= tour.name %></h2>
+                    <p><%= tour.description.truncate(100) %></p>
+                    <div class="tour-info">
+                      <p><strong>Hours:</strong> <%= tour.hours %></p>
+                      <p><strong>Reviews:</strong> <%= tour.average_rating %> ⭐</p>
+                    </div>
+                    <%= link_to 'More Info', tour_path(tour), class: 'btn-more-info' %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+.tour-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.tour-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.tour-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: calc(33.333% - 20px);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.tour-card:hover {
+  transform: scale(1.03);
+}
+
+.tour-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.tour-content {
+  padding: 15px;
+}
+
+.tour-content h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.tour-content p {
+  color: #555;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.tour-info {
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+
+.tour-info p {
+  margin-bottom: 5px;
+  color: #666;
+}
+</style>
+<style>
+    .search-box {
+        border-radius: 5px;
+        background-color: #fff;
+    }
+    .search-box .section {
+        margin-bottom: 20px;
+    }
+    .search-box .section:last-child {
+        margin-bottom: 0;
+    }
+    .search-box .section i {
+        color: #ffc107;
+        margin-right: 10px;
+    }
+    .search-box .section .title {
+        font-size: 14px;
+        color: #6c757d;
+        margin-bottom: 5px;
+    }
+    .search-box .section .content {
+        font-size: 16px;
+        font-weight: bold;
+        color: #212529;
+    }
+    .search-box .btn-search {
+        background-color: #ffc107;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        width: 100%;
+    }
+</style>

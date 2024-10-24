@@ -19,5 +19,6 @@ Rails.application.routes.draw do
     member do
       patch 'book'
     end
-  end  
+  end
+  resources :tours, only: [:index, :show]  
 end
