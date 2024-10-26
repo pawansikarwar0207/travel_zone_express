@@ -132,3 +132,86 @@ tour6 = Tour.create!(
 tour6.viewpoints.create!(name: "Sand Dunes", description: "Massive sand dunes perfect for dune bashing and sandboarding.")
 tour6.viewpoints.create!(name: "Bedouin Camp", description: "A traditional desert camp offering local cuisine and entertainment.")
 tour6.viewpoints.create!(name: "Sunset Viewpoint", description: "Witness the stunning desert sunset over the horizon.")
+
+Flight.create!(
+  flight_number: "VJ296",
+  departure_location: "South Elinor",
+  arrival_location: "Port Nicklaus",
+  take_off_time: DateTime.new(2024, 2, 22, 1, 27),
+  landing_time: DateTime.new(2024, 2, 22, 7, 27),
+  seat_type: "Premium",
+  baggage_checkin: "10 Kgs",
+  baggage_cabin: "6 Kgs",
+  price: 34.00,
+  number_of_seats: 0,
+  logo: "/assets/airline_logo.png",  # Add a logo image here
+  image: "/assets/flight_image.jpg"  # Add a flight image here
+)
+
+
+# db/seeds.rb
+
+flights = [
+  {
+    flight_number: "VJ296",
+    departure_location: "South Elinor",
+    arrival_location: "Port Nicklaus",
+    take_off_time: DateTime.new(2024, 2, 22, 1, 27),
+    landing_time: DateTime.new(2024, 2, 22, 7, 27),
+    seat_type: "Premium",
+    baggage_checkin: "10 Kgs",
+    baggage_cabin: "6 Kgs",
+    price: 34.00,
+    number_of_seats: 50,
+    logo: "/assets/airline_logo.png",
+    image: "/assets/flight_image1.jpg"
+  },
+  {
+    flight_number: "EK202",
+    departure_location: "New Zurich",
+    arrival_location: "Cape Hatherford",
+    take_off_time: DateTime.new(2024, 3, 15, 3, 45),
+    landing_time: DateTime.new(2024, 3, 15, 9, 45),
+    seat_type: "Economy",
+    baggage_checkin: "15 Kgs",
+    baggage_cabin: "7 Kgs",
+    price: 25.00,
+    number_of_seats: 80,
+    logo: "/assets/airline_logo.png",
+    image: "/assets/flight_image2.jpg"
+  },
+  {
+    flight_number: "AS408",
+    departure_location: "Port Diana",
+    arrival_location: "Gotham City",
+    take_off_time: DateTime.new(2024, 4, 10, 5, 30),
+    landing_time: DateTime.new(2024, 4, 10, 11, 30),
+    seat_type: "Business",
+    baggage_checkin: "20 Kgs",
+    baggage_cabin: "8 Kgs",
+    price: 75.00,
+    number_of_seats: 30,
+    logo: "/assets/airline_logo.png",
+    image: "/assets/flight_image3.jpg"
+  },
+  {
+    flight_number: "AS408",
+    departure_location: "Port Diana",
+    arrival_location: "Gotham City",
+    take_off_time: DateTime.new(2024, 4, 10, 5, 30),
+    landing_time: DateTime.new(2024, 4, 10, 11, 30),
+    seat_type: "Business",
+    baggage_checkin: "20 Kgs",
+    baggage_cabin: "8 Kgs",
+    price: 75.00,
+    number_of_seats: 30,
+    logo: "/assets/airline_logo.png",
+    image: "/assets/flight_image4.jpg"
+  }
+]
+
+flights.each do |flight|
+  Flight.create!(flight)
+end
+
+# Similarly add logo and image for other flights...

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'flights/index'
+  get 'flights/show'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
@@ -21,4 +23,6 @@ Rails.application.routes.draw do
     end
   end
   resources :tours, only: [:index, :show]  
+  resources :flights, only: [:index, :show]
+  get '/flights/search', to: 'flights#search'
 end

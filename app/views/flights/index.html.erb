@@ -1,0 +1,173 @@
+<div class="flight-navbar">
+  <form action="/flights/search" method="get" class="flight-form">
+    <div class="form-group">
+      <label for="from_location">From</label>
+      <input type="text" id="from_location" name="from_location" placeholder="Departure" required>
+    </div>
+
+    <div class="form-group">
+      <label for="to_location">To</label>
+      <input type="text" id="to_location" name="to_location" placeholder="Destination" required>
+    </div>
+
+    <div class="form-group">
+      <label for="depart_date">Depart</label>
+      <input type="date" id="depart_date" name="depart_date" value="<%= Date.today %>">
+    </div>
+
+    <div class="form-group">
+      <label for="return_date">Return</label>
+      <input type="date" id="return_date" name="return_date" value="<%= Date.today + 7.days %>">
+    </div>
+
+    <div class="form-group">
+      <label for="travelers">Travelers</label>
+      <select id="travelers" name="travelers">
+        <option value="1">1 Traveler</option>
+        <option value="2">2 Travelers</option>
+        <option value="3">3 Travelers</option>
+        <option value="4">4 Travelers</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="class_type">Class</label>
+      <select id="class_type" name="class_type">
+        <option value="economy">Economy</option>
+        <option value="premium">Premium</option>
+        <option value="business">Business</option>
+        <option value="first_class">First Class</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn-search">Search</button>
+    </div>
+  </form>
+</div>
+<div class="container-fluid px-0">
+  <div class="col-lg-12 col-md-12 mx-auto">
+    <div class="bravo-list-item">
+      <div class="d-flex justify-content-between align-items-center mb-4 topbar-search">
+        <h3 class="font-size-21 mx-3 fw-bold mb-0 text-lh-1 result-count" style="font-family: 'Playfair Display', serif; font-size: 2rem; color: #2c3e50;">
+          <%= @flights.count %> Exclusive Flights Found
+        </h3>
+      </div>
+
+      <div class="row gx-1"> <!-- Slight gap for separation -->
+        <% @flights.each do |flight| %>
+          <div class="col-md-4 mb-4 px-2">
+            <div class="card h-100" style="border: none; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); border-radius: 15px; overflow: hidden; transition: transform 0.3s ease;">
+              <!-- Premium gradient header with gold accent -->
+              <div style="background: linear-gradient(135deg, #283e51 0%, #4b79a1 100%); padding: 20px; color: #f1c40f;">
+                <h4 class="mb-1" style="font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600;">
+                  <%= flight.departure_location %> to <%= flight.arrival_location %>
+                </h4>
+                <p class="mb-0" style="font-size: 1.1rem; color: #ecf0f1; opacity: 0.9;">₱<%= flight.price %> per person</p>
+              </div>
+
+              <div class="card-body p-4">
+                <div class="d-flex justify-content-center mb-3">
+                  <img src="<%= asset_path(flight.logo) %>" alt="Airline Logo" style="width: 80px; border-radius: 10px; background: #fff; padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                </div>
+                <p style="color: #2c3e50; font-size: 1.2rem; font-weight: 500;"> ✈️ <strong>Take off:</strong> <%= flight.take_off_time.strftime("%a %b %d %I:%M %p") %></p>
+                <p style="color: #2c3e50; font-size: 1.2rem; font-weight: 500;"> ✈️ <strong>Landing:</strong> <%= flight.landing_time.strftime("%a %b %d %I:%M %p") %></p>
+                <div class="text-center mt-3">
+                  <img src="<%= asset_path(flight.image) %>" alt="Flight Image" style="width: 100%; border-radius: 10px; box-shadow: 0 6px 12px rgba(0,0,0,0.15);">
+                </div>
+              </div>
+
+              <div class="card-footer text-center" style="background-color: #f7f7f7; border-top: 1px solid #ddd;">
+                <%= link_to 'View Details', flight_path(flight), class: "btn btn-outline-primary btn-lg", style: "border-radius: 50px; padding: 10px 30px; font-weight: bold;" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .flight-navbar {
+  background-color: #003366; /* Dark blue background */
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.flight-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-right: 15px;
+}
+
+.form-group label {
+  font-size: 12px;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.form-group input, 
+.form-group select {
+  padding: 8px;
+  border-radius: 3px;
+  border: none;
+  font-size: 14px;
+}
+
+.form-group input {
+  max-width: 150px;
+}
+
+.form-group select {
+  max-width: 120px;
+}
+
+/* Center align the button vertically in the form */
+.btn-search {
+  background-color: #ffcc00; /* Yellow button */
+  color: #003366;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: center; /* Align the button vertically in the center */
+}
+
+.btn-search:hover {
+  background-color: #ffc107; /* Slight hover effect */
+}
+
+@media (max-width: 768px) {
+  .flight-form {
+    flex-direction: column;
+    align-items: center; /* Center-align the form items */
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .form-group input, 
+  .form-group select {
+    max-width: 100%;
+  }
+
+  .btn-search {
+    width: 100%; /* Full-width button on small screens */
+    margin-top: 15px; /* Add spacing above the button */
+  }
+}
+</style>
