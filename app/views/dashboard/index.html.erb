@@ -1,0 +1,126 @@
+<div style="display: flex; max-width: 1200px; margin: 0 auto; font-family: Arial, sans-serif;">
+  
+  <div style="width: 250px; background-color: #003366; color: white; padding: 20px; border-radius: 20px 0 0 20px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+      <h2 style="font-size: 1.5em; font-weight: 700; color: #fff; margin-bottom: 20px;">Project Overview</h2>
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 10px;">
+          <a href="/cars" style="color: #e3f2fd; text-decoration: none;">
+            <i class="fas fa-car" style="margin-right: 10px;"></i>Cars
+          </a>
+        </li>
+        <li style="margin-bottom: 10px;">
+          <a href="/flights" style="color: #e3f2fd; text-decoration: none;">
+            <i class="fas fa-plane" style="margin-right: 10px;"></i>Flights
+          </a>
+        </li>
+        <li style="margin-bottom: 10px;">
+          <a href="/tours" style="color: #e3f2fd; text-decoration: none;">
+            <i class="fas fa-route" style="margin-right: 10px;"></i>Tours
+          </a>
+        </li>
+        <li style="margin-bottom: 10px;">
+          <a href="/hotels" style="color: #e3f2fd; text-decoration: none;">
+            <i class="fas fa-hotel" style="margin-right: 10px;"></i>Hotels
+          </a>
+        </li>
+      </ul>
+  </div>
+  
+  
+  <!-- Main Dashboard Content -->
+  <div style="flex: 1; padding: 30px; background-color: #f9fafb; border-radius: 0 20px 20px 0; box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);">
+    <h1 style="font-size: 2em; font-weight: 700; color: #003366; text-align: center; margin-bottom: 30px;">Dashboard</h1>
+
+    <!-- Summary Boxes -->
+    <div style="display: flex; gap: 20px; justify-content: space-between; margin-bottom: 40px;">
+      <!-- Cars Box -->
+      <div style="flex: 1; background: linear-gradient(145deg, #e3f2fd, #bbdefb); padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1); transition: transform 0.3s;">
+        <h2 style="font-size: 1.2em; color: #003366; margin-bottom: 10px;">Cars</h2>
+        <div style="font-size: 1.5em; font-weight: 600; color: #00509e;"><%= @car_count %> Bookings</div>
+      </div>
+      
+      <!-- Flights Box -->
+      <div style="flex: 1; background: linear-gradient(145deg, #e8f5e9, #c8e6c9); padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1); transition: transform 0.3s;">
+        <h2 style="font-size: 1.2em; color: #00796b; margin-bottom: 10px;">Flights</h2>
+        <div style="font-size: 1.5em; font-weight: 600; color: #2e7d32;"><%= @flight_count %> Bookings</div>
+      </div>
+
+      <!-- Tours Box -->
+      <div style="flex: 1; background: linear-gradient(145deg, #fff3e0, #ffe0b2); padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1); transition: transform 0.3s;">
+        <h2 style="font-size: 1.2em; color: #ef6c00; margin-bottom: 10px;">Tours</h2>
+        <div style="font-size: 1.5em; font-weight: 600; color: #f57c00;"><%= @tour_count %> Bookings</div>
+      </div>
+
+      <!-- Hotels Box -->
+      <div style="flex: 1; background: linear-gradient(145deg, #fce4ec, #f8bbd0); padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1); transition: transform 0.3s;">
+        <h2 style="font-size: 1.2em; color: #d81b60; margin-bottom: 10px;">Hotels</h2>
+        <div style="font-size: 1.5em; font-weight: 600; color: #c2185b;"><%= @hotel_count %> Bookings</div>
+      </div>
+    </div>
+
+    <!-- Line Chart -->
+    <div style="background-color: #fff; padding: 20px; border-radius: 15px; box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);">
+      <canvas id="luxuryDoughnutChart" width="400" height="150" style="max-width: 100%; margin: auto;"></canvas>
+    </div>
+    
+  </div>
+  
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const ctx = document.getElementById('luxuryDoughnutChart').getContext('2d');
+    const luxuryDoughnutChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Cars', 'Flights', 'Tours', 'Hotels'],
+        datasets: [{
+          label: 'Revenue',
+          data: [50, 60, 70, 80], // Example values; replace with dynamic data
+          backgroundColor: [
+            'rgba(255, 215, 0, 0.8)',    // Gold
+            'rgba(72, 201, 176, 0.8)',   // Mint Green
+            'rgba(54, 162, 235, 0.8)',   // Soft Blue
+            'rgba(153, 102, 255, 0.8)'   // Lavender
+          ],
+          borderColor: [
+            '#FFD700', // Dark Gold
+            '#48C9B0', // Dark Mint
+            '#36A2EB', // Blue Border
+            '#9966FF'  // Dark Lavender
+          ],
+          borderWidth: 2,
+          hoverOffset: 12, // Creates an elegant pop-out effect on hover
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              color: '#1a1a1a', // Dark text for luxury
+              font: {
+                size: 14,
+                weight: 'bold',
+                family: 'Georgia'
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.7)', // Darker tooltip background
+            titleFont: { size: 16, weight: 'bold' },
+            bodyFont: { size: 14 },
+            borderWidth: 1,
+            borderColor: '#FFD700'
+          }
+        },
+        layout: {
+          padding: 20
+        }
+      }
+    });
+  });
+</script>
+
