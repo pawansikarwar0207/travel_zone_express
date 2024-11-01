@@ -1,0 +1,202 @@
+<!-- app/views/events/index.html.erb -->
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-lg-4 col-xl-3 col-md-12">
+      <div class="card mt-5 rounded-0 p-3 shadow-sm">
+        <div class="search-box">
+          <div class="section">
+            <div class="title">Location</div>
+            <div class="content"><i class="fas fa-map-marker-alt"></i> Where are you going?</div>
+          </div>
+          <div class="section">
+            <div class="title">From - To</div>
+            <div class="content"><i class="fas fa-calendar-alt"></i> 02/22/2024 - 02/22/2024</div>
+          </div>
+          <button class="btn btn-search"><i class="fas fa-search"></i> Search</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8 col-xl-9 col-md-12">
+      <div class="bravo-list-item">
+        <div class="d-flex justify-content-between align-items-center mb-4 topbar-search">
+          <h3 class="font-size-21 mx-3 fw-bold mb-0 text-lh-1 result-count"><%= @events.count %> Events found</h3>
+        </div>
+        <div class="events-container">
+          <% @events.each do |event| %>
+            <div class="event-card">
+              <!-- Event Image -->
+              <%= image_tag(event.image_url || asset_path("default_event_image.jpg"), alt: event.title, class: "event-card-image") %>
+
+              <!-- Event Information -->
+              <div class="event-card-content">
+                <h3><%= link_to event.title, event_path(event), class: "event-title" %></h3>
+
+                <!-- Location -->
+                <p class="event-location">
+                  <i class="fas fa-map-marker-alt"></i> <%= event.location %>, <%= event.city %>
+                </p>
+
+                <!-- Start Time -->
+                <p class="event-start-time">
+                  <i class="far fa-clock"></i> Start Time: <%= event.start_time.strftime("%H:%M") %>
+                </p>
+
+                <!-- Duration -->
+                <p class="event-duration">
+                  <i class="fas fa-hourglass-half"></i> Duration: <%= event.duration %>
+                </p>
+              </div>
+
+              <!-- Event Button -->
+              <div class="event-card-footer">
+                <%= link_to "View Details", event_path(event), class: "btn-view-details" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.container {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Search Box Styling */
+.search-box {
+  border-radius: 8px;
+  padding: 20px;
+  background: linear-gradient(135deg, #fff, #f7f7f7);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.search-box .section {
+  margin-bottom: 15px;
+}
+
+.search-box .section i {
+  color: #ffc107;
+  margin-right: 8px;
+}
+
+.search-box .section .title {
+  font-size: 14px;
+  color: #6c757d;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.search-box .section .content {
+  font-size: 16px;
+  color: #333;
+}
+
+.search-box .btn-search {
+  background: #8b0000;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.search-box .btn-search:hover {
+  background: #a52a2a;
+}
+
+/* Events Container and Card Styling */
+.events-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.event-card {
+  width: 320px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
+  position: relative;
+  border: 1px solid #ddd;
+}
+
+.event-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.event-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.event-card-content {
+  padding: 20px;
+  text-align: center;
+}
+
+.event-title {
+  font-size: 1.2em;
+  color: #333;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.event-title:hover {
+  color: #8b0000;
+}
+
+.event-location,
+.event-start-time,
+.event-duration {
+  color: #666;
+  font-size: 0.95em;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.event-location i,
+.event-start-time i,
+.event-duration i {
+  margin-right: 6px;
+  color: #8b0000;
+}
+
+/* Button Styling */
+.event-card-footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #f0f0f0;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.btn-view-details {
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #8b0000;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
+}
+
+.btn-view-details:hover {
+  background-color: #a52a2a;
+}
+</style>

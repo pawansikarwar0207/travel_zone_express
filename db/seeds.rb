@@ -215,3 +215,24 @@ flights.each do |flight|
 end
 
 # Similarly add logo and image for other flights...
+
+
+5.times do |i|
+  Event.create!(
+    title: "Event ##{i + 1}",
+    subtitle: "Subtitle for Event ##{i + 1}",
+    location: "Washington, D.C.",
+    venue: "Venue ##{i + 1}",
+    map_link: "https://www.google.com/maps",
+    reviews: rand(1..10),
+    wishlists: rand(0..5),
+    start_time: DateTime.now + i.days,
+    duration: "#{rand(1..5)}H",
+    city: ["San Francisco", "Los Angeles", "New York", "Chicago", "Miami"].sample,
+    description: "Description for Event ##{i + 1}",
+    highlights: "Highlight 1\nHighlight 2\nHighlight 3",
+    image_url: ["https://placekitten.com/300/200", "https://placebear.com/300/200", "https://picsum.photos/300/200"].sample,
+    event_type: ["Glastonbury", "Latitude", "Wilderness", "Exit Festival", "Primavera Sound"].sample
+  )
+end
+

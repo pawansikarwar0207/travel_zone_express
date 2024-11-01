@@ -27,4 +27,5 @@ Rails.application.routes.draw do
   resources :flights, only: [:index, :show]
   get '/flights/search', to: 'flights#search'
   get 'dashboard', to: 'dashboard#index'
+  resources :events, only: [:index, :show]
 end
