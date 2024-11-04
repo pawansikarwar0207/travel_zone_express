@@ -236,3 +236,108 @@ end
   )
 end
 
+# db/seeds.rb
+
+# Ensure you have images in the following path: app/assets/images/boats/
+boats_data = [
+  {
+    name: "My Way 100",
+    rating: 4.7,
+    reviews_count: 3,
+    passengers: 15,
+    crew: 3,
+    price: 150,
+    description: "Libero sem vitae sed donec conubia integer nisi integer rhoncus...",
+    manufacturer: "Sunrise",
+    model: "Summer Breeze",
+    year: 2010,
+    engines: "Diesel",
+    fuel: "Composite",
+    photo: 'my_way_100.jpg' # Ensure this image exists
+  },
+  {
+    name: "Ocean Explorer",
+    rating: 4.9,
+    reviews_count: 5,
+    passengers: 20,
+    crew: 4,
+    price: 250,
+    description: "Vitae purus sit amet luctus venenatis lectus magna...",
+    manufacturer: "Oceanic",
+    model: "Wave Rider",
+    year: 2015,
+    engines: "Gas",
+    fuel: "Petrol",
+    photo: 'ocean_explorer.jpg' # Ensure this image exists
+  },
+  {
+    name: "Sail Away",
+    rating: 4.5,
+    reviews_count: 8,
+    passengers: 10,
+    crew: 2,
+    price: 180,
+    description: "Sed nisi lacus sed viverra tellus in hac habitasse...",
+    manufacturer: "WindSail",
+    model: "Wind Glider",
+    year: 2012,
+    engines: "Electric",
+    fuel: "Hybrid",
+    photo: 'sail_away.jpg' # Ensure this image exists
+  },
+  {
+    name: "Sea Breeze",
+    rating: 4.6,
+    reviews_count: 2,
+    passengers: 12,
+    crew: 3,
+    price: 200,
+    description: "Aliquam malesuada bibendum arcu vitae elementum curabitur...",
+    manufacturer: "Breeze Inc.",
+    model: "Seaside",
+    year: 2018,
+    engines: "Diesel",
+    fuel: "Biofuel",
+    photo: 'sea_breeze.jpg' # Ensure this image exists
+  },
+  {
+    name: "Adventure Seeker",
+    rating: 4.8,
+    reviews_count: 4,
+    passengers: 18,
+    crew: 4,
+    price: 300,
+    description: "In ante metus dictum at tempor commodo ullamcorper a lacus...",
+    manufacturer: "Adventure Co.",
+    model: "Explorer",
+    year: 2020,
+    engines: "Gas",
+    fuel: "Petrol",
+    photo: 'adventure_seeker.jpg' # Ensure this image exists
+  }
+]
+
+boats_data.each do |boat_data|
+  Boat.create(
+    name: boat_data[:name],
+    rating: boat_data[:rating],
+    reviews_count: boat_data[:reviews_count],
+    passengers: boat_data[:passengers],
+    crew: boat_data[:crew],
+    price: boat_data[:price],
+    description: boat_data[:description],
+    manufacturer: boat_data[:manufacturer],
+    model: boat_data[:model],
+    year: boat_data[:year],
+    engines: boat_data[:engines],
+    fuel: boat_data[:fuel]
+  ).tap do |boat|
+    # Attach the photo
+    boat.photo.attach(
+      io: File.open(Rails.root.join('app/assets/images', boat_data[:photo])),
+      filename: boat_data[:photo],
+      content_type: 'image/jpeg'
+    )
+  end
+end
+
