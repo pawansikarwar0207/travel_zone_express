@@ -74,5 +74,6 @@ end
 
 gem 'cssbundling-rails'
 gem 'devise'
-gem 'faker', '~> 2.20'
 gem 'carrierwave', '~> 3.0'
+gem 'faker', '~> 3.5.1'
+gem 'mini_magick'

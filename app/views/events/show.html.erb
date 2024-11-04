@@ -1,0 +1,145 @@
+<!-- app/views/events/show.html.erb -->
+<div class="event-page">
+  <!-- Event Image and Title -->
+  <div class="event-header">
+    <%= image_tag @event.image_url, alt: @event.title, class: "event-image" %>
+    <h1 class="event-title"><%= @event.title %></h1>
+    <p class="event-subtitle"><%= @event.subtitle %></p>
+  </div>
+
+  <!-- Event Details -->
+  <div class="event-details">
+    <h2><i class="fas fa-map-marker-alt gold-icon"></i> Event Highlights in <%= @event.location %></h2>
+    <p><i class="fas fa-building gold-icon"></i> <%= @event.venue %> - <a href="<%= @event.map_link %>" target="_blank" class="link">View on map</a></p>
+    <p><i class="fas fa-star gold-icon"></i> <%= pluralize(@event.reviews, "Review") %> | <i class="fas fa-heart gold-icon"></i> <%= pluralize(@event.wishlists, "Wishlist") %></p>
+    <p><i class="far fa-clock gold-icon"></i> Start Time: <%= @event.start_time.strftime("%H:%M") %></p>
+    <p><i class="fas fa-hourglass-half gold-icon"></i> Duration: <%= @event.duration %></p>
+    <p><i class="fas fa-city gold-icon"></i> Location: <%= @event.city %></p>
+  </div>
+
+  <!-- Description Section -->
+  <div class="event-description">
+    <h3><i class="fas fa-info-circle gold-icon"></i> Description</h3>
+    <p><%= @event.description %></p>
+  </div>
+
+  <!-- Highlights Section -->
+  <div class="event-highlights">
+    <h3><i class="fas fa-bullseye gold-icon"></i> Highlights</h3>
+    <ul>
+      <% @event.highlights.split("\n").each do |highlight| %>
+        <li><i class="fas fa-check-circle gold-icon"></i> <%= highlight %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <!-- Event Types -->
+  <div class="event-types">
+    <h3><i class="fas fa-calendar-alt gold-icon"></i> Event Types</h3>
+    <ul>
+      <% ["Glastonbury", "Latitude", "Wilderness", "Exit Festival", "Primavera Sound"].each do |event_type| %>
+        <li><i class="fas fa-music gold-icon"></i> <%= event_type %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<style>
+.event-page {
+  max-width: 800px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.event-header {
+  text-align: center;
+  background: linear-gradient(to bottom, #fff, #f8f8f8);
+  padding: 30px;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+.event-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.event-title {
+  font-size: 2.8em;
+  font-weight: bold;
+  color: #333;
+}
+
+.event-subtitle {
+  font-size: 1.3em;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.gold-icon {
+  color: #d4af37;
+  margin-right: 10px;
+}
+
+.event-details, .event-description, .event-highlights, .event-types {
+  background: #fff;
+  padding: 25px;
+  margin: 20px 0;
+  border-radius: 12px;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+  border-top: 3px solid #d4af37;
+}
+
+.event-details h2, .event-description h3, .event-highlights h3, .event-types h3 {
+  font-size: 1.6em;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.event-details p {
+  font-size: 1.1em;
+  color: #555;
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.event-description h3, .event-highlights h3, .event-types h3 {
+  color: #333;
+}
+
+.event-highlights ul, .event-types ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.event-highlights li, .event-types li {
+  background: #f9f9f9;
+  padding: 10px 15px;
+  margin: 8px 0;
+  border-radius: 6px;
+  font-size: 1.1em;
+  color: #555;
+  display: flex;
+  align-items: center;
+}
+
+.event-highlights li, .event-types li:hover {
+  background: #f3f1ec;
+}
+
+.link {
+  color: #d4af37;
+  text-decoration: underline;
+}
+
+.link:hover {
+  color: #a58525;
+  text-decoration: none;
+}
+</style>

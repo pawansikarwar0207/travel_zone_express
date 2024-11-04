@@ -1,0 +1,157 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<div style="display: flex; max-width: 1200px; margin: 0 auto; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+  <!-- Sidebar -->
+  <div style="width: 250px; background-color: #003366; color: white; padding: 20px; border-radius: 20px 0 0 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);">
+    <h2 style="font-size: 1.6em; font-weight: 700; color: #e0f7fa; margin-bottom: 20px;">Project Overview</h2>
+    <ul style="list-style: none; padding: 0;">
+      <li style="margin-bottom: 15px;">
+        <a href="/dashboard" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
+          <i class="fas fa-desktop" style="margin-right: 12px;"></i> Dashboard
+        </a>
+      </li>
+      <li style="margin-bottom: 15px;">
+        <a style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
+          <i class="fas fa-map-marker-alt" style="margin-right: 12px;"></i> Locations
+        </a>
+      </li>
+      <li style="margin-bottom: 15px;">
+        <a href="/cars" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
+          <i class="fas fa-car" style="margin-right: 12px;"></i> Cars
+        </a>
+      </li>
+      <li style="margin-bottom: 15px;">
+        <a href="/flights" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
+          <i class="fas fa-plane" style="margin-right: 12px;"></i> Flights
+        </a>
+      </li>
+      <li style="margin-bottom: 15px;">
+        <a href="/tours" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
+          <i class="fas fa-route" style="margin-right: 12px;"></i> Tours
+        </a>
+      </li>
+      <li style="margin-bottom: 15px;">
+        <a href="/hotels" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
+          <i class="fas fa-hotel" style="margin-right: 12px;"></i> Hotels
+        </a>
+      </li>
+      <li style="margin-bottom: 15px;">
+        <a href="/events" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
+          <i class="fas fa-calendar-alt" style="margin-right: 12px;"></i> Events
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Summary Boxes -->
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; width: 100%;">
+    <!-- Individual Summary Box -->
+    <div style="flex: 1; min-width: 220px; background: linear-gradient(145deg, #e3f2fd, #bbdefb); padding: 25px; border-radius: 15px; text-align: center; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); transition: transform 0.3s, box-shadow 0.3s;">
+      <h2 style="font-size: 1.3em; color: #003366; margin-bottom: 10px;"><i class="fas fa-car-side" style="margin-right: 8px; color: #003366;"></i> Cars</h2>
+      <div style="font-size: 1.6em; font-weight: 600; color: #00509e;"><%= @car_count %> Bookings</div>
+    </div>
+
+    <div style="flex: 1; min-width: 220px; background: linear-gradient(145deg, #e8f5e9, #c8e6c9); padding: 25px; border-radius: 15px; text-align: center; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); transition: transform 0.3s, box-shadow 0.3s;">
+      <h2 style="font-size: 1.3em; color: #00796b; margin-bottom: 10px;"><i class="fas fa-plane" style="margin-right: 8px; color: #00796b;"></i> Flights</h2>
+      <div style="font-size: 1.6em; font-weight: 600; color: #2e7d32;"><%= @flight_count %> Bookings</div>
+    </div>
+
+    <div style="flex: 1; min-width: 220px; background: linear-gradient(145deg, #fff3e0, #ffe0b2); padding: 25px; border-radius: 15px; text-align: center; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); transition: transform 0.3s, box-shadow 0.3s;">
+      <h2 style="font-size: 1.3em; color: #ef6c00; margin-bottom: 10px;"><i class="fas fa-route" style="margin-right: 8px; color: #ef6c00;"></i> Tours</h2>
+      <div style="font-size: 1.6em; font-weight: 600; color: #f57c00;"><%= @tour_count %> Bookings</div>
+    </div>
+
+    <div style="flex: 1; min-width: 220px; background: linear-gradient(145deg, #fce4ec, #f8bbd0); padding: 25px; border-radius: 15px; text-align: center; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); transition: transform 0.3s, box-shadow 0.3s;">
+      <h2 style="font-size: 1.3em; color: #d81b60; margin-bottom: 10px;"><i class="fas fa-hotel" style="margin-right: 8px; color: #d81b60;"></i> Hotels</h2>
+      <div style="font-size: 1.6em; font-weight: 600; color: #c2185b;"><%= @hotel_count %> Bookings</div>
+    </div>
+
+    <div style="flex: 1; min-width: 220px; background: linear-gradient(145deg, #e8eaf6, #c5cae9); padding: 25px; border-radius: 15px; text-align: center; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); transition: transform 0.3s, box-shadow 0.3s;">
+      <h2 style="font-size: 1.3em; color: #3f51b5; margin-bottom: 10px;"><i class="fas fa-dollar-sign" style="margin-right: 8px; color: #3f51b5;"></i> Revenue</h2>
+      <div style="font-size: 1.6em; font-weight: 600; color: #303f9f;">₱<%= @total_revenue %></div>
+    </div>
+
+    <div style="flex: 1; min-width: 220px; background: linear-gradient(145deg, #f1f8e9, #dcedc8); padding: 25px; border-radius: 15px; text-align: center; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); transition: transform 0.3s, box-shadow 0.3s;">
+      <h2 style="font-size: 1.3em; color: #689f38; margin-bottom: 10px;"><i class="fas fa-hand-holding-usd" style="margin-right: 8px; color: #689f38;"></i> Earnings</h2>
+      <div style="font-size: 1.6em; font-weight: 600; color: #558b2f;">₱<%= @total_earnings %></div>
+    </div>
+
+    <div style="flex: 1; min-width: 220px; background: linear-gradient(145deg, #f3e5f5, #e1bee7); padding: 25px; border-radius: 15px; text-align: center; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); transition: transform 0.3s, box-shadow 0.3s;">
+      <h2 style="font-size: 1.3em; color: #8e24aa; margin-bottom: 10px;"><i class="fas fa-list" style="margin-right: 8px; color: #8e24aa;"></i> Total Bookings</h2>
+      <div style="font-size: 1.6em; font-weight: 600; color: #6a1b9a;"><%= @total_bookings %></div>
+    </div>
+
+     <!-- Individual Summary Box for Events -->
+    <div style="flex: 1; min-width: 220px; background: linear-gradient(145deg, #fffde7, #fff9c4); padding: 25px; border-radius: 15px; text-align: center; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); transition: transform 0.3s, box-shadow 0.3s;">
+      <h2 style="font-size: 1.3em; color: #fbc02d; margin-bottom: 10px;"><i class="fas fa-calendar-alt" style="margin-right: 8px; color: #fbc02d;"></i> Events</h2>
+      <div style="font-size: 1.6em; font-weight: 600; color: #f57f17;"><%= @event_count %> Bookings</div>
+    </div>
+
+    <div style="flex: 1; min-width: 220px; background: linear-gradient(145deg, #e0f2f1, #b2dfdb); padding: 25px; border-radius: 15px; text-align: center; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); transition: transform 0.3s, box-shadow 0.3s;">
+      <h2 style="font-size: 1.3em; color: #00695c; margin-bottom: 10px;"><i class="fas fa-chart-line" style="margin-right: 8px; color: #00695c;"></i> Metrics</h2>
+      <div style="font-size: 1.6em; font-weight: 600; color: #004d40;"><%= @metric_count %> Metrics</div>
+    </div>
+    <div style="max-width: 400px; margin: 20px auto;"> <!-- Smaller container -->
+      <canvas id="luxuryDoughnutChart" width="400" height="400"></canvas> <!-- Reduced size -->
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const ctx = document.getElementById('luxuryDoughnutChart').getContext('2d');
+    const luxuryDoughnutChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Cars', 'Flights', 'Tours', 'Hotels'],
+        datasets: [{
+          label: 'Revenue',
+          data: [50, 60, 70, 80], // Example values; replace with dynamic data
+          backgroundColor: [
+            'rgba(255, 215, 0, 0.8)',    // Gold
+            'rgba(72, 201, 176, 0.8)',   // Mint Green
+            'rgba(54, 162, 235, 0.8)',   // Soft Blue
+            'rgba(153, 102, 255, 0.8)'   // Lavender
+          ],
+          borderColor: [
+            '#FFD700', // Dark Gold
+            '#48C9B0', // Dark Mint
+            '#36A2EB', // Blue Border
+            '#9966FF'  // Dark Lavender
+          ],
+          borderWidth: 2,
+          hoverOffset: 12, // Creates an elegant pop-out effect on hover
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              color: '#1a1a1a', // Dark text for luxury
+              font: {
+                size: 14,
+                weight: 'bold',
+                family: 'Georgia'
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.7)', // Darker tooltip background
+            titleFont: { size: 16, weight: 'bold' },
+            bodyFont: { size: 14 },
+            borderWidth: 1,
+            borderColor: '#FFD700'
+          }
+        },
+        layout: {
+          padding: 20
+        }
+      }
+    });
+  });
+</script>
+

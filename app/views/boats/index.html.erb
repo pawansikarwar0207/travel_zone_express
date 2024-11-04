@@ -1,0 +1,194 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-lg-4 col-xl-3 col-md-12">
+      <div class="card mt-5 rounded-0">
+        <div class="card-body">
+
+         <div class="container mt-5">
+          <div class="search-box">
+              <div class="section">
+                  <div class="title">Location</div>
+                  <div class="content"><i class="fas fa-map-marker-alt"></i> Where are you going?</div>
+              </div>
+              <div class="section">
+                  <div class="title">Start Date</div>
+                  <div class="content"><i class="fas fa-calendar-alt"></i>09/24/2024</div>
+              </div>
+              <button class="btn btn-search"><i class="fas fa-search"></i> Search</button>
+          </div>
+      </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8 col-xl-9 col-md-12">
+      <div class="bravo-list-item">
+        <div class="d-flex justify-content-between align-items-center mb-4 topbar-search">
+          <h3 class="font-size-21 mx-3 fw-bold mb-0 text-lh-1 result-count"> <%= @boats.count %> Boats found </h3>
+        </div>
+          <div class="boat-grid">
+            <% @boats.each do |boat| %>
+              <div class="boat-card">
+                <%= link_to boat_path(boat) do %>
+                  <div class="boat-image-container">
+                    <% if boat.photo.attached? %>
+                      <%= image_tag boat.photo, alt: boat.name, class: 'boat-image' %>
+                    <% else %>
+                      <p class="no-image"><strong>No image available</strong></p>
+                    <% end %>
+                  </div>
+                  
+                  <div class="boat-details">
+                    <h2 class="boat-title"><%= boat.name %></h2>
+                    <p class="boat-info">
+                      <i class="fas fa-star icon" style="color: #FFD700;"></i>
+                      <strong>Rating:</strong> <%= boat.rating %> (<%= boat.reviews_count %> Reviews)
+                    </p>
+                    <p class="boat-info">
+                      <i class="fas fa-users icon" style="color: #4CAF50;"></i>
+                      <strong>Passengers:</strong> <%= boat.passengers %>
+                    </p>
+                    <p class="boat-info">
+                      <i class="fas fa-user-tie icon" style="color: #2196F3;"></i>
+                      <strong>Crew:</strong> <%= boat.crew %>
+                    </p>
+                    <p class="boat-info">
+                      <i class="fas fa-coins icon" style="color: #FF9800;"></i>
+                      <strong>Price per day:</strong> ₱<%= boat.rental_price %>
+                    </p>
+                    <% if boat.available %>
+                      <span class="btn-primary rent-button"><i class="fas fa-ship icon" style="color: #ffffff;"></i> Rent this Boat</span>
+                    <% else %>
+                      <p class="unavailable-text"><i class="fas fa-ban icon" style="color: #F44336;"></i> <strong>Currently Unavailable</strong></p>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+    </div>
+  </div>
+</div>
+<style>
+.boat-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 15px;
+  text-align: center;
+}
+
+.boat-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+</style>
+<style>
+    .search-box {
+        border-radius: 5px;
+        background-color: #fff;
+    }
+    .search-box .section {
+        margin-bottom: 20px;
+    }
+    .search-box .section:last-child {
+        margin-bottom: 0;
+    }
+    .search-box .section i {
+        color: #ffc107;
+        margin-right: 10px;
+    }
+    .search-box .section .title {
+        font-size: 14px;
+        color: #6c757d;
+        margin-bottom: 5px;
+    }
+    .search-box .section .content {
+        font-size: 16px;
+        font-weight: bold;
+        color: #212529;
+    }
+    .search-box .btn-search {
+        background-color: #ffc107;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        width: 100%;
+    }
+</style>
+<style>
+.page-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.boat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.boat-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.boat-card:hover {
+  transform: scale(1.05);
+}
+
+.boat-image-container {
+  height: 200px;
+  overflow: hidden;
+}
+
+.boat-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.boat-details {
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+
+.boat-title {
+  font-size: 1.5rem;
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.boat-info {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.btn-primary {
+  display: inline-block;
+  margin-top: 10px;
+  background-color: #4CAF50;
+  color: #ffffff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.unavailable-text {
+  color: #F44336;
+  font-weight: bold;
+}
+</style>

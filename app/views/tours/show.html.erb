@@ -1,0 +1,74 @@
+<div class="tour-show-page">
+  <h1 class="tour-title"><%= @tour.name %></h1>
+  
+  <!-- Tour Image -->
+  <div class="tour-image-container">
+    <%= image_tag(@tour.image.present? ? @tour.image : 'default_image.png', alt: "Tour Image", width: 400, height: 300, class: 'tour-image') %>
+  </div>
+
+  <!-- Tour Description -->
+  <div class="tour-description">
+    <h2>Description</h2>
+    <p><%= @tour.description %></p>
+  </div>
+
+  <!-- Tour Information -->
+  <div class="tour-info">
+    <h2>Tour Information</h2>
+    <p><strong>Hours:</strong> <%= @tour.hours %></p>
+    <p><strong>Reviews:</strong> <%= @tour.average_rating %> ⭐</p>
+  </div>
+
+  <!-- Key Viewpoints Section -->
+  <h2>Key Viewpoints</h2>
+  <ul class="tour-viewpoints">
+    <% @tour.viewpoints.each do |viewpoint| %>
+      <li>
+        <strong><%= viewpoint.name %>:</strong> <%= viewpoint.description %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<style>
+.tour-show-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.tour-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.tour-image-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tour-description {
+  margin-bottom: 30px;
+}
+
+.tour-info p {
+  margin: 10px 0;
+}
+
+.tour-viewpoints, .tour-includes, .tour-excludes, .tour-facilities {
+  list-style: none;
+  padding-left: 0;
+}
+
+.tour-viewpoints li, .tour-includes li, .tour-excludes li, .tour-facilities li {
+  padding: 5px 0;
+  font-size: 16px;
+}
+
+h2 {
+  margin-top: 30px;
+  font-size: 24px;
+  color: #333;
+}
+</style>
