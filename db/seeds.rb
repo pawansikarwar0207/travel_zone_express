@@ -341,3 +341,20 @@ boats_data.each do |boat_data|
   end
 end
 
+FoodItem.create([
+  {
+    name: 'Cheeseburger',
+    description: 'A juicy cheeseburger with fresh lettuce, tomato, and cheese.',
+    price: 5.99,
+    preparation_time: 15,
+    photo_url: 'cheeseburger.jpg' # Image file stored in app/assets/images/
+  },
+  {
+    name: 'Pepperoni Pizza',
+    description: 'A classic pepperoni pizza with a crispy crust and gooey cheese.',
+    price: 8.99,
+    preparation_time: 20,
+    photo_url: 'pepperoni_pizza.jpg' # Image file stored in app/assets/images/
+  }
+  # Add more items similarly
+])

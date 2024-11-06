@@ -1,0 +1,125 @@
+<h1 class="order-details-heading">Order Details</h1>
+<div class="order-summary">
+  <div class="order-info">
+    <p><strong>Status:</strong> <%= @order.status %></p>
+    <p><strong>Estimated Delivery Time:</strong> <%= @order.delivery_time.strftime("%H:%M, %d %b %Y") %></p>
+  </div>
+  <h2 class="order-items-heading">Ordered Items</h2>
+  <ul class="order-items-list">
+    <% @order.order_items.each do |item| %>
+      <li class="order-item">
+        <div class="item-details">
+          <% if item.food_item.photo_url.present? %>
+            <img src="<%= asset_path(item.food_item.photo_url) %>" alt="<%= item.food_item.name %>" class="item-image">
+          <% else %>
+            <img src="default-image-url.jpg" alt="No image available" class="item-image">
+          <% end %>
+          <div class="item-text">
+            <span class="item-name"><%= item.food_item.name %></span>
+            <span class="item-quantity">Quantity: <%= item.quantity %></span>
+            <p class="item-price">Total Price: $<%= item.food_item.price * item.quantity %></p>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5;
+    padding: 20px;
+  }
+
+  .order-details-heading {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .order-summary {
+    background: linear-gradient(135deg, #e0f7fa, #ffffff);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    margin: 20px auto;
+    border: 1px solid #e0e0e0;
+  }
+
+  .order-info p {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #34495e;
+  }
+
+  .order-items-heading {
+    font-size: 1.8rem;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+  }
+
+  .order-items-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .order-item {
+    background-color: #ffffff;
+    border: 1px solid #dcdde1;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .order-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .item-details {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #dcdde1;
+  }
+
+  .item-text {
+    flex-grow: 1;
+    margin-left: 15px;
+  }
+
+  .item-name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #2c3e50;
+  }
+
+  .item-quantity {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    margin-top: 5px;
+    display: block;
+  }
+
+  .item-price {
+    font-size: 1.1rem;
+    color: #2980b9;
+    margin-top: 10px;
+  }
+</style>
