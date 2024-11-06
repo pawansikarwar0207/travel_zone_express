@@ -1,0 +1,180 @@
+<h1 class="order-heading">Place an Order</h1>
+<%= form_with model: @order, local: true, id: 'order-form', class: 'order-form' do |f| %>
+  <div class="food-items-container">
+    <% @food_items.each do |food_item| %>
+      <div class="food-item-card" id="food-item-<%= food_item.id %>">
+        <%= image_tag asset_path(food_item.photo_url), alt: food_item.name, class: 'food-photo' %>
+        <div class="food-item-details">
+          <h2 class="food-name"><%= food_item.name %></h2>
+          <p class="food-price">$<%= number_with_precision(food_item.price, precision: 2) %></p>
+          <p class="food-description"><%= food_item.description %></p>
+          <div class="order-options">
+            <%= check_box_tag 'order[food_item_ids][]', food_item.id, false, id: "order_food_item_#{food_item.id}", class: 'food-item-checkbox' %>
+            <%= label_tag "order_food_item_#{food_item.id}", 'Select', class: 'select-label' %>
+            <%= number_field_tag "order[quantity][#{food_item.id}]", 0, min: 0, class: 'quantity-field' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= f.submit 'Place Order', class: 'order-submit-button' %>
+<% end %>
+
+<div id="selected-items-container" class="selected-items-container" style="display:none;">
+  <h2 class="selected-items-heading">Selected Items</h2>
+  <div id="selected-items"></div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const checkboxes = document.querySelectorAll('.food-item-checkbox');
+    const selectedItemsContainer = document.getElementById('selected-items-container');
+    const selectedItemsDiv = document.getElementById('selected-items');
+
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', function () {
+        const itemId = this.value;
+        const itemCard = document.getElementById(`food-item-${itemId}`);
+        
+        if (this.checked) {
+          const itemClone = itemCard.cloneNode(true);
+          itemClone.querySelector('.food-item-checkbox').remove(); // Remove checkbox from the clone
+          selectedItemsDiv.appendChild(itemClone);
+        } else {
+          const itemToRemove = selectedItemsDiv.querySelector(`#food-item-${itemId}`);
+          if (itemToRemove) selectedItemsDiv.removeChild(itemToRemove);
+        }
+
+        selectedItemsContainer.style.display = selectedItemsDiv.children.length > 0 ? 'block' : 'none';
+      });
+    });
+  });
+</script>
+
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+  }
+
+  .order-heading {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .food-items-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .food-item-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 250px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .food-item-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .food-photo {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .food-item-details {
+    padding: 15px;
+  }
+
+  .food-name {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 5px;
+  }
+
+  .food-price {
+    font-size: 1.2rem;
+    color: #e67e22;
+    margin-bottom: 10px;
+  }
+
+  .food-description {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 15px;
+  }
+
+  .order-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .select-label {
+    margin-left: 5px;
+    font-size: 1rem;
+  }
+
+  .quantity-field {
+    width: 60px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .order-submit-button {
+    display: block;
+    margin: 30px auto;
+    padding: 15px 30px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s;
+  }
+
+  .order-submit-button:hover {
+    background-color: #2980b9;
+  }
+
+  .selected-items-container {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 30px;
+    max-width: 700px;
+    margin: 30px auto;
+  }
+
+  .selected-items-heading {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  .food-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center; /* Centers each item in the column */
+}
+
+.food-item-card {
+  width: 80%; /* Adjust width as needed */
+  max-width: 600px; /* Limits the maximum width for larger screens */
+}
+</style>
