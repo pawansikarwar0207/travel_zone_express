@@ -37,4 +37,5 @@ Rails.application.routes.draw do
   end
   resources :food_items, only: [:index]
   resources :orders, only: [:new, :create, :show]
+  resources :orders, only: [:index, :show, :update]
 end

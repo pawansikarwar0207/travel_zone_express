@@ -1,6 +1,10 @@
   class OrdersController < ApplicationController
       before_action :authenticate_user!
-    
+      
+      def index
+        @orders = Order.includes(:food_items).order(created_at: :desc)
+      end
+
       def new
         if params[:food_item_ids]
           @food_items = FoodItem.where(id: params[:food_item_ids])
@@ -37,11 +41,22 @@
         @order = current_user.orders.find(params[:id])
       end
     
+      def update
+        @order = Order.find(params[:id])
+      
+        # Update only the status field using params[:order][:status]
+        if @order.update(status: params[:order][:status])
+          redirect_to orders_path, notice: "Order status updated successfully."
+        else
+          redirect_to orders_path, alert: "Failed to update order status."
+        end
+      end          
+
       private
     
       def order_params
-        params.require(:order).permit(order_items_attributes: [:food_item_id, :quantity])
-      end
+        params.require(:order).permit(:status, order_items_attributes: [:food_item_id, :quantity])
+      end      
     
       def calculate_total_price(order)
         total = 0
