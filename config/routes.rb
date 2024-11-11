@@ -35,7 +35,7 @@ Rails.application.routes.draw do
       patch 'confirm_rental'
     end
   end
-  resources :food_items, only: [:index]
+  resources :food_items
   resources :orders, only: [:new, :create, :show]
   resources :orders, only: [:index, :show, :update]
 end

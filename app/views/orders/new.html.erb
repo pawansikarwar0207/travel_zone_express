@@ -3,7 +3,11 @@
   <div class="food-items-container">
     <% @food_items.each do |food_item| %>
       <div class="food-item-card" id="food-item-<%= food_item.id %>">
-        <%= image_tag asset_path(food_item.photo_url), alt: food_item.name, class: 'food-photo' %>
+        <% if food_item.photo.attached? %>
+            <%= image_tag food_item.photo, alt: food_item.name, class: 'food-photo' %>
+          <% else %>
+            <p>Image not available</p>
+          <% end %>
         <div class="food-item-details">
           <h2 class="food-name"><%= food_item.name %></h2>
           <p class="food-price">$<%= number_with_precision(food_item.price, precision: 2) %></p>

@@ -9,10 +9,10 @@
     <% @order.order_items.each do |item| %>
       <li class="order-item">
         <div class="item-details">
-          <% if item.food_item.photo_url.present? %>
-            <img src="<%= asset_path(item.food_item.photo_url) %>" alt="<%= item.food_item.name %>" class="item-image">
+          <% if item.food_item.photo.attached? %>
+            <%= image_tag url_for(item.food_item.photo), alt: item.food_item.name, class: 'item-image' %>
           <% else %>
-            <img src="default-image-url.jpg" alt="No image available" class="item-image">
+            <%= image_tag 'default_image.jpg', alt: 'No image available', class: 'item-image' %>
           <% end %>
           <div class="item-text">
             <span class="item-name"><%= item.food_item.name %></span>

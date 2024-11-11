@@ -1,0 +1,73 @@
+<div class="container mt-5">
+  <div class="card shadow-lg border-0 rounded-4" style="background-color: #ffffff;">
+    <div class="card-header text-white text-center py-3" style="background: linear-gradient(45deg, #1A73E8, #34A853);">
+      <h2 class="mb-0"><%= @food_item.new_record? ? 'Add New Food Item' : 'Edit Food Item' %></h2>
+    </div>
+    <div class="card-body p-4">
+      <%= form_with model: @food_item, local: true, class: 'row g-4' do |f| %>
+        
+        <!-- Name Field -->
+        <div class="col-md-6">
+          <%= f.label :name, class: 'form-label fw-bold text-dark' %>
+          <%= f.text_field :name, class: 'form-control shadow-sm', placeholder: 'Enter food item name' %>
+        </div>
+
+        <!-- Price Field -->
+        <div class="col-md-6">
+          <%= f.label :price, class: 'form-label fw-bold text-dark' %>
+          <%= f.number_field :price, step: 0.01, class: 'form-control shadow-sm', placeholder: 'Enter price in USD' %>
+        </div>
+
+        <!-- Preparation Time Field -->
+        <div class="col-md-6">
+          <%= f.label :preparation_time, class: 'form-label fw-bold text-dark' %>
+          <%= f.number_field :preparation_time, step: 1, class: 'form-control shadow-sm', placeholder: 'Time in minutes' %>
+        </div>
+
+        <!-- Photo Upload Field -->
+        <div class="col-md-6">
+          <%= f.label :photo, class: 'form-label fw-bold text-dark' %>
+          <%= f.file_field :photo, class: 'form-control shadow-sm' %>
+        </div>
+
+        <!-- Description Field -->
+        <div class="col-md-12">
+          <%= f.label :description, class: 'form-label fw-bold text-dark' %>
+          <%= f.text_area :description, class: 'form-control shadow-sm', placeholder: 'Describe the food item', rows: 3 %>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="col-12 text-center">
+          <%= f.submit 'Save Food Item', class: 'btn btn-gradient w-50 py-2 text-white' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<style>
+/* Updated Custom Styles */
+.btn-gradient {
+  background: linear-gradient(45deg, #1A73E8, #34A853);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(45deg, #34A853, #1A73E8);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-control.shadow-sm {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ced4da;
+}
+
+.card {
+  border-radius: 1rem;
+}
+
+.card-header {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+</style>
