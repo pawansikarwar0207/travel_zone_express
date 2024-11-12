@@ -28,13 +28,13 @@ Rails.application.routes.draw do
   get '/flights/search', to: 'flights#search'
   get 'dashboard', to: 'dashboard#index'
   resources :events
-  resources :boats, only: [:index, :show]
-    resources :boats do
+  resources :boats do
     member do
       get 'rent'
       patch 'confirm_rental'
     end
   end
+  
   resources :food_items
   resources :orders, only: [:new, :create, :show]
   resources :orders, only: [:index, :show, :update]

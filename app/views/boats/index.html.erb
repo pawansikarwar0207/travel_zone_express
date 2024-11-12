@@ -25,6 +25,7 @@
       <div class="bravo-list-item">
         <div class="d-flex justify-content-between align-items-center mb-4 topbar-search">
           <h3 class="font-size-21 mx-3 fw-bold mb-0 text-lh-1 result-count"> <%= @boats.count %> Boats found </h3>
+          <%= link_to 'Add new boat', new_boat_path, class: 'btn btn-primary mb-3 mt-3' %>
         </div>
           <div class="boat-grid">
             <% @boats.each do |boat| %>

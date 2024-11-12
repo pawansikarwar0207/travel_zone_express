@@ -12,7 +12,7 @@
           <% if item.food_item.photo.attached? %>
             <%= image_tag url_for(item.food_item.photo), alt: item.food_item.name, class: 'item-image' %>
           <% else %>
-            <%= image_tag 'default_image.jpg', alt: 'No image available', class: 'item-image' %>
+            <%= image_tag 'cheeseburger.jpg', alt: 'No image available', class: 'item-image' %>
           <% end %>
           <div class="item-text">
             <span class="item-name"><%= item.food_item.name %></span>
