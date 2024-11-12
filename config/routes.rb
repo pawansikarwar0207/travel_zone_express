@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   resources :flights, only: [:index, :show]
   get '/flights/search', to: 'flights#search'
   get 'dashboard', to: 'dashboard#index'
-  resources :events, only: [:index, :show]
+  resources :events
   resources :boats, only: [:index, :show]
     resources :boats do
     member do

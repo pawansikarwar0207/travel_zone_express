@@ -2,7 +2,11 @@
 <div class="event-page">
   <!-- Event Image and Title -->
   <div class="event-header">
-    <%= image_tag @event.image_url, alt: @event.title, class: "event-image" %>
+     <% if @event.image.attached? %>
+      <%= image_tag @event.image, alt: @event.title, class: "event-image" %>
+    <% else %>
+      <%= image_tag 'default_event_image.jpg', alt: 'Default Image', class: "event-image" %>
+    <% end %>
     <h1 class="event-title"><%= @event.title %></h1>
     <p class="event-subtitle"><%= @event.subtitle %></p>
   </div>
