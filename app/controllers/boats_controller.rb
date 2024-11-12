@@ -1,5 +1,4 @@
 class BoatsController < ApplicationController
-
   before_action :set_boats, only: [:edit, :update, :show, :destroy, :rent, :confirm_rental ]
 
   def index
@@ -7,8 +6,8 @@ class BoatsController < ApplicationController
   end
 
   def create
-    @boats = Boat.create(boat_params)
-    if @boats.save
+    @boat = Boat.new(boat_params)
+    if @boat.save
       redirect_to boats_path, notice: 'Boat has been created successfully.'
     else
       render :new, status: :unprocessable_entity

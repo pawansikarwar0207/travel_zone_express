@@ -52,6 +52,7 @@
         <h3 class="font-size-21 mx-3 fw-bold mb-0 text-lh-1 result-count" style="font-family: 'Playfair Display', serif; font-size: 2rem; color: #2c3e50;">
           <%= @flights.count %> Exclusive Flights Found
         </h3>
+        <%= link_to 'Add new flight', new_flight_path, class: 'btn btn-primary mt-2 mb-2' %>
       </div>
 
       <div class="row gx-1"> <!-- Slight gap for separation -->
@@ -68,12 +69,12 @@
 
               <div class="card-body p-4">
                 <div class="d-flex justify-content-center mb-3">
-                  <img src="<%= asset_path(flight.logo) %>" alt="Airline Logo" style="width: 80px; border-radius: 10px; background: #fff; padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                  <img src="<%#= asset_path(flight.logo) %>" alt="Airline Logo" style="width: 80px; border-radius: 10px; background: #fff; padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                 </div>
                 <p style="color: #2c3e50; font-size: 1.2rem; font-weight: 500;"> ✈️ <strong>Take off:</strong> <%= flight.take_off_time.strftime("%a %b %d %I:%M %p") %></p>
                 <p style="color: #2c3e50; font-size: 1.2rem; font-weight: 500;"> ✈️ <strong>Landing:</strong> <%= flight.landing_time.strftime("%a %b %d %I:%M %p") %></p>
                 <div class="text-center mt-3">
-                  <img src="<%= asset_path(flight.image) %>" alt="Flight Image" style="width: 100%; border-radius: 10px; box-shadow: 0 6px 12px rgba(0,0,0,0.15);">
+                  <img src="<%#= asset_path(flight.image) %>" alt="Flight Image" style="width: 100%; border-radius: 10px; box-shadow: 0 6px 12px rgba(0,0,0,0.15);">
                 </div>
               </div>
 

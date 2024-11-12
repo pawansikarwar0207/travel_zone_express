@@ -2,11 +2,11 @@ Rails.application.routes.draw do
   get 'dashboard/index'
   get 'flights/index'
   get 'flights/show'
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
     passwords: 'users/passwords',
-
   }
 
   root 'home#index'
@@ -18,16 +18,22 @@ Rails.application.routes.draw do
     resources :hotel_rules
     resources :reviews
   end
+
   resources :cars, only: [:index, :show] do
     member do
       patch 'book'
     end
   end
+
   resources :tours, only: [:index, :show]  
-  resources :flights, only: [:index, :show]
+  
+  resources :flights
+  
   get '/flights/search', to: 'flights#search'
   get 'dashboard', to: 'dashboard#index'
+  
   resources :events
+  
   resources :boats do
     member do
       get 'rent'

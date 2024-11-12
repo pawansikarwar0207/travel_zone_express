@@ -1,10 +1,41 @@
 class FlightsController < ApplicationController
+  before_action :set_flight, only: [:edit, :update, :destroy, :show] 
+
   def index
-    @flights = Flight.all
+    @flights = Flight.all.order(created_at: :desc)
+  end
+
+  def new
+    @flight = Flight.new
+  end
+
+  def create
+    @flight = Flight.new(flight_params)
+    if @flight.save
+      redirect_to flights_path, notice: "Flight was successfully created."
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
   end
 
   def show
-    @flight = Flight.find(params[:id])
+  end
+
+  def update
+    if @flight.update(flight_params)
+      redirect_to flights_path, notice: "Flight was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @flight.destroy
+      redirect_to flights_path, notice: 'Flight was successfully deleted.'
+    end
   end
   
   def search
@@ -24,4 +55,14 @@ class FlightsController < ApplicationController
   
     render :index
   end  
+
+  private
+
+  def set_flight
+    @flight = Flight.find(params[:id])
+  end
+
+  def flight_params
+    params.require(:flight).permit(:flight_number, :departure_location, :arrival_location, :take_off_time, :landing_time, :seat_type, :baggage_checkin, :baggage_cabin, :price, :number_of_seats, :logo, :image)
+  end
 end

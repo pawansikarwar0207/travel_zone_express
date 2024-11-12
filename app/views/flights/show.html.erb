@@ -1,41 +1,47 @@
-<h1>Flight Details</h1>
+<div class="col-lg-10 mx-auto mt-5 mb-5">
+  <h1>Flight Details</h1>
+  <div style="display: flex; align-items: center;">
+    <div style="flex: 1;">
+      <p><img src="<%#= asset_path(@flight.logo) %>" alt="Airline Logo" style="width: 100px;"></p>
+      <h2><strong>Flight:</strong> <%= @flight.flight_number %></h2>
+      <p><strong>Departure:</strong> <%= @flight.take_off_time.strftime("%I:%M %p, %a, %d %b %y") %> from <%= @flight.departure_location %></p>
+      <p><strong>Duration:</strong> 6 hrs</p>
+      <p><strong>Arrival:</strong> <%= @flight.landing_time.strftime("%I:%M %p, %a, %d %b %y") %> at <%= @flight.arrival_location %></p>
+    </div>
+    <div style="flex: 1;">
+      <img src="<%#= asset_path(@flight.image) %>" alt="Flight Image" style="width: 100%;">
+    </div>
+  </div>
 
-<div style="display: flex; align-items: center;">
-  <div style="flex: 1;">
-    <p><img src="<%= asset_path(@flight.logo) %>" alt="Airline Logo" style="width: 100px;"></p>
-    <h2><strong>Flight:</strong> <%= @flight.flight_number %></h2>
-    <p><strong>Departure:</strong> <%= @flight.take_off_time.strftime("%I:%M %p, %a, %d %b %y") %> from <%= @flight.departure_location %></p>
-    <p><strong>Duration:</strong> 6 hrs</p>
-    <p><strong>Arrival:</strong> <%= @flight.landing_time.strftime("%I:%M %p, %a, %d %b %y") %> at <%= @flight.arrival_location %></p>
-  </div>
-  <div style="flex: 1;">
-    <img src="<%= asset_path(@flight.image) %>" alt="Flight Image" style="width: 100%;">
-  </div>
+  <h2>Seat Options</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Seat Type</th>
+        <th>Baggage (Check-in)</th>
+        <th>Baggage (Cabin)</th>
+        <th>Price</th>
+        <th>Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Flight.where(flight_number: @flight.flight_number).each do |seat| %>
+        <tr>
+          <td><%= seat.seat_type %></td>
+          <td><%= seat.baggage_checkin %></td>
+          <td><%= seat.baggage_cabin %></td>
+          <td>₱<%= seat.price %></td>
+          <td><%= seat.number_of_seats %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to '<i class="fas fa-arrow-left"></i> Back'.html_safe, flights_path, class: 'btn btn-secondary' %>
+  <%= link_to '<i class="fas fa-pencil"></i> Edit'.html_safe, edit_flight_path(@flight), class: 'btn btn-primary' %>
+  <%= link_to '<i class="fas fa-trash"></i> Delete'.html_safe, flight_path(@flight), data: { turbo_method: :delete, turbo_confirm: 'Are You Sure?' }, class: 'btn btn-danger' %>
 </div>
 
-<h2>Seat Options</h2>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Seat Type</th>
-      <th>Baggage (Check-in)</th>
-      <th>Baggage (Cabin)</th>
-      <th>Price</th>
-      <th>Number</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% Flight.where(flight_number: @flight.flight_number).each do |seat| %>
-      <tr>
-        <td><%= seat.seat_type %></td>
-        <td><%= seat.baggage_checkin %></td>
-        <td><%= seat.baggage_cabin %></td>
-        <td>₱<%= seat.price %></td>
-        <td><%= seat.number_of_seats %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 <style>
 .btn-primary {
   background-color: #007bff;
