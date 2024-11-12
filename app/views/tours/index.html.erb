@@ -25,13 +25,18 @@
       <div class="bravo-list-item">
         <div class="d-flex justify-content-between align-items-center mb-4 topbar-search">
           <h3 class="font-size-21 mx-3 fw-bold mb-0 text-lh-1 result-count"> <%= @tours.count %> Tour found </h3>
+          <%= link_to "Add New Tours", new_tour_path, class: 'btn btn-primary' %>
         </div>
           <div class="tour-container">
             <div class="tour-cards">
               <% @tours.each do |tour| %>
                 <div class="tour-card">
                   <div class="tour-image">
-                    <%= image_tag(tour.image.present? ? tour.image : 'default_image.png', alt: "Tour Image", class: 'tour-image') %>
+                    <% if tour.image.present? %>
+                      <%= image_tag tour.image, alt: "Tour Image", class: 'tour-image'  %>
+                    <% else %>
+                      <%= image_tag "https://img.freepik.com/free-psd/travel-tour-social-media-post-instagram-post-web-banner-template_501970-224.jpg?ga=GA1.1.590165737.1721391013&semt=ais_hybrid", alt: "Tour Image", class: 'tour-image' %>    
+                    <% end %>
                   </div>
                   <div class="tour-content">
                     <h2><%= tour.name %></h2>

@@ -19,13 +19,13 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
-  resources :cars, only: [:index, :show] do
+  resources :cars do
     member do
       patch 'book'
     end
   end
 
-  resources :tours, only: [:index, :show]  
+  resources :tours  
   
   resources :flights
   

@@ -25,6 +25,7 @@
       <div class="bravo-list-item">
         <div class="d-flex justify-content-between align-items-center mb-4 topbar-search">
           <h3 class="font-size-21 mx-3 fw-bold mb-0 text-lh-1 result-count"> <%= @cars.count %> Cars found </h3>
+          <%= link_to "Add new car", new_car_path, class: 'btn btn-primary' %>
         </div>
 
         <div class="row">
@@ -34,7 +35,7 @@
                 <% if car.photo.attached? %>
                   <%= image_tag car.photo.variant(resize_to_limit: [300, 200]), class: 'card-img-top', alt: "#{car.name} photo" %>
                 <% else %>
-                  <img src="/path/to/default-image.jpg" class="card-img-top" alt="No image available">
+                  <%= image_tag "default_car.avif", class:"card-img-top", alt:"No image available"  %>
                 <% end %>
 
                 <div class="card-body">

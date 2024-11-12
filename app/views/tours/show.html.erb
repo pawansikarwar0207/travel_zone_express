@@ -1,9 +1,13 @@
-<div class="tour-show-page">
+<div class="col-lg-10 mx-auto mt-5 mb-5 tour-show-page">
   <h1 class="tour-title"><%= @tour.name %></h1>
   
   <!-- Tour Image -->
   <div class="tour-image-container">
-    <%= image_tag(@tour.image.present? ? @tour.image : 'default_image.png', alt: "Tour Image", width: 400, height: 300, class: 'tour-image') %>
+    <% if @tour.image.present? %>
+      <%= image_tag @tour.image, alt: "Tour Image", class: 'tour-image'  %>
+    <% else %>
+      <%= image_tag "https://img.freepik.com/free-psd/travel-tour-social-media-post-instagram-post-web-banner-template_501970-224.jpg?ga=GA1.1.590165737.1721391013&semt=ais_hybrid", alt: "Tour Image", class: 'tour-image' %>    
+    <% end %>
   </div>
 
   <!-- Tour Description -->
@@ -28,7 +32,13 @@
       </li>
     <% end %>
   </ul>
+  <div>
+    <%= link_to '<i class="fas fa-arrow-left"></i> Back'.html_safe, tours_path, class: 'btn btn-secondary' %>
+    <%= link_to '<i class="fas fa-pencil"></i> Edit'.html_safe, edit_tour_path(@tour), class: 'btn btn-primary' %>
+    <%= link_to '<i class="fas fa-trash"></i> Delete'.html_safe, tour_path(@tour), data: { turbo_method: :delete, turbo_confirm: 'Are You Sure?' }, class: 'btn btn-danger' %>
+  </div>
 </div>
+
 <style>
 .tour-show-page {
   max-width: 900px;

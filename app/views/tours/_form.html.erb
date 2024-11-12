@@ -1,0 +1,46 @@
+<div class="container">
+	<%= form_with model: @tour, local: true do |form| %>
+		<% if @tour.errors.any? %>
+	  	<div class="card alert alert-danger">
+		    <div id="error_explanation">
+		      <h2><%= pluralize(@tour.errors.count, "error") %> prohibited this tour from being saved:</h2>
+		      <ul>
+		        <% @tour.errors.full_messages.each do |message| %>
+		          <li><%= message %></li>
+		        <% end %>
+		      </ul>
+		    </div>
+	  	</div>
+		<% end %>
+
+		<div class="form-group">
+			<%= form.label :name %>
+			<%= form.text_field :name, class: 'form-control' %>
+		</div>
+
+		<div class="form-group">
+			<%= form.label :description %>
+			<%= form.text_area :description, class: 'form-control' %>
+		</div>
+
+		<div class="form-group">
+			<%= form.label :hours %>
+			<%= form.text_field :hours, class: 'form-control' %>
+		</div>
+
+		<div class="form-group">
+			<%= form.label :average_rating %>
+			<%= form.number_field :average_rating, step: 0.1, class: 'form-control' %>
+		</div>
+
+		<div class="form-group">
+			<%= form.label :image %>
+			<%= form.file_field :image, class: 'form-control' %>
+		</div>
+
+		<div>
+			<%= form.submit class: 'btn btn-primary mt-2 mb-2' %>
+		</div>
+
+	<% end %>
+</div>

@@ -1,11 +1,11 @@
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
   <div class="row">
     <!-- Car Image Section -->
     <div class="col-md-6">
       <% if @car.photo.attached? %>
         <%= image_tag @car.photo.variant(resize_to_limit: [600, 400]).processed, class: 'img-fluid rounded shadow' %>
       <% else %>
-        <p>No image available</p>
+        <%= image_tag "default_car.avif", class:"card-img-top", alt:"No image available"  %>
       <% end %>
     </div>
 
@@ -75,5 +75,11 @@
         <li class="list-group-item">Steering Wheel</li>
       </ul>
     </div>
+  </div>
+
+  <div class="mt-4">
+    <%= link_to '<i class="fas fa-arrow-left"></i> Back'.html_safe, cars_path, class: 'btn btn-secondary' %>
+    <%= link_to '<i class="fas fa-pencil"></i> Edit'.html_safe, edit_car_path(@car), class: 'btn btn-primary' %>
+    <%= link_to '<i class="fas fa-trash"></i> Delete'.html_safe, car_path(@car), data: { turbo_method: :delete, turbo_confirm: 'Are You Sure?' }, class: 'btn btn-danger' %>
   </div>
 </div>
