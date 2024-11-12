@@ -18,6 +18,7 @@
     </div>
     <div class="col-lg-8 col-xl-9 col-md-12">
       <div class="bravo-list-item">
+      <%= link_to 'Create New Event', new_event_path, class: 'btn btn-success mb-3' %>
         <div class="d-flex justify-content-between align-items-center mb-4 topbar-search">
           <h3 class="font-size-21 mx-3 fw-bold mb-0 text-lh-1 result-count"><%= @events.count %> Events found</h3>
         </div>
@@ -25,8 +26,11 @@
           <% @events.each do |event| %>
             <div class="event-card">
               <!-- Event Image -->
-              <%= image_tag(event.image_url || asset_path("default_event_image.jpg"), alt: event.title, class: "event-card-image") %>
-
+                <% if event.image.attached? %>
+                  <%= image_tag(event.image, alt: event.title, class: "event-card-image") %>
+                <% else %>
+                <p>NO image available </p>
+                <% end %>
               <!-- Event Information -->
               <div class="event-card-content">
                 <h3><%= link_to event.title, event_path(event), class: "event-title" %></h3>
@@ -45,6 +49,11 @@
                 <p class="event-duration">
                   <i class="fas fa-hourglass-half"></i> Duration: <%= event.duration %>
                 </p>
+                 <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-warning' %>
+                 <%= link_to 'Delete', event_path(event), 
+                    method: :delete, 
+                    data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, 
+                    class: 'btn btn-danger' %>
               </div>
 
               <!-- Event Button -->

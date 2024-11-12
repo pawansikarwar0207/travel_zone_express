@@ -1,0 +1,138 @@
+<%= form_with(model: @event, local: true, class: 'elegant-form container') do |form| %>
+
+  <div class="form-body">
+    <div class="form-group mb-3">
+      <%= form.text_field :title, placeholder: "Event Title", class: 'form-control stylish-input' %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= form.text_field :subtitle, placeholder: "Event Subtitle", class: 'form-control stylish-input' %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= form.text_field :location, placeholder: "Event Location", class: 'form-control stylish-input' %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= form.text_field :city, placeholder: "City", class: 'form-control stylish-input' %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= form.text_field :venue, placeholder: "Event Venue", class: 'form-control stylish-input' %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= form.url_field :map_link, placeholder: "Google Map Link", class: 'form-control stylish-input' %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= form.datetime_select :start_time, class: 'form-control stylish-input' %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= form.text_field :duration, placeholder: "Duration (e.g., 2 hours)", class: 'form-control stylish-input' %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= form.file_field :image, class: 'form-control stylish-input file-input' %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= form.text_area :description, placeholder: "Event Description", class: 'form-control stylish-input', rows: 3 %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= form.text_area :highlights, placeholder: "Event Highlights", class: 'form-control stylish-input', rows: 2 %>
+    </div>
+
+    <div class="text-center mt-4">
+      <%= form.submit 'Create Event', class: 'btn submit-btn' %>
+    </div>
+  </div>
+<% end %>
+<style>
+/* Container Styling */
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 15px;
+  background: #f5f5f5;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styling */
+.form-header {
+  margin-bottom: 20px;
+}
+
+.form-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-subtitle {
+  font-size: 1rem;
+  color: #777;
+  margin-top: 5px;
+}
+
+/* Input and TextArea Styling */
+.stylish-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  font-size: 1rem;
+  color: #333;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.2s ease;
+}
+
+.stylish-input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+.file-input {
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Button Styling */
+.submit-btn {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.5);
+}
+
+/* Form Group Styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-body {
+  padding: 10px 0;
+}
+
+/* Smooth Placeholder Effect */
+.stylish-input::placeholder {
+  color: #bbb;
+  opacity: 0.8;
+}
+</style>
