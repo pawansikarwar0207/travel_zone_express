@@ -1,6 +1,7 @@
 class FoodItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_food_item, only: [:edit, :update, :destroy]
+  before_action :authorize_admin, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @food_items = FoodItem.all
@@ -38,6 +39,13 @@ class FoodItemsController < ApplicationController
   end
 
   private
+
+  def authorize_admin
+    unless current_user&.admin?
+      flash[:alert] = "Only admin users can perform this action."
+      redirect_to root_path
+    end
+  end
 
   def set_food_item
     @food_item = FoodItem.find(params[:id])

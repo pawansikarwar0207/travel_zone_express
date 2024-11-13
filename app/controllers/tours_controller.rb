@@ -1,5 +1,6 @@
 class ToursController < ApplicationController
   before_action :set_tour, only: [:edit, :show, :update, :destroy]
+  before_action :authorize_admin, only: [:new, :create, :edit, :update, :destroy]
   
   def index
     @tours = Tour.all.order(created_at: :desc)
@@ -39,6 +40,13 @@ class ToursController < ApplicationController
   end
 
   private 
+
+  def authorize_admin
+    unless current_user&.admin?
+      flash[:alert] = "Only admin users can perform this action."
+      redirect_to root_path
+    end
+  end
 
   def set_tour
     @tour = Tour.find(params[:id])

@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update destroy]
+  before_action :authorize_admin, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /events
   def index
@@ -45,6 +46,13 @@ class EventsController < ApplicationController
   end
 
   private
+  
+  def authorize_admin
+    unless current_user&.admin?
+      flash[:alert] = "Only admin users can perform this action."
+      redirect_to root_path
+    end
+  end
 
   def set_event
     @event = Event.find(params[:id])

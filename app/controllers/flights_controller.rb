@@ -1,5 +1,6 @@
 class FlightsController < ApplicationController
   before_action :set_flight, only: [:edit, :update, :destroy, :show] 
+  before_action :authorize_admin, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @flights = Flight.all.order(created_at: :desc)
@@ -57,6 +58,13 @@ class FlightsController < ApplicationController
   end  
 
   private
+
+  def authorize_admin
+    unless current_user&.admin?
+      flash[:alert] = "Only admin users can perform this action."
+      redirect_to root_path
+    end
+  end
 
   def set_flight
     @flight = Flight.find(params[:id])

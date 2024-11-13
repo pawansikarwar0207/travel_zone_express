@@ -52,9 +52,10 @@
   <% end %>
 
   <%= link_to '<i class="fas fa-arrow-left"></i> Back to Boats'.html_safe, boats_path, class: 'btn btn-secondary' %>
-  <%= link_to '<i class="fas fa-pencil"></i> Edit'.html_safe, edit_boat_path(@boat), class: 'btn btn-primary' %>
-  <%= link_to '<i class="fas fa-trash"></i> Delete'.html_safe, boat_path(@boat), data: { turbo_method: :delete, turbo_confirm: 'Are You Sure?' }, class: 'btn btn-danger' %>
-
+  <% if current_user&.admin? %>
+    <%= link_to '<i class="fas fa-pencil"></i> Edit'.html_safe, edit_boat_path(@boat), class: 'btn btn-primary' %>
+    <%= link_to '<i class="fas fa-trash"></i> Delete'.html_safe, boat_path(@boat), data: { turbo_method: :delete, turbo_confirm: 'Are You Sure?' }, class: 'btn btn-danger' %>
+  <% end %>
   <style>
     .page-title {
       text-align: center;
