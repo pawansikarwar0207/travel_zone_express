@@ -1,5 +1,7 @@
 class BoatsController < ApplicationController
   before_action :set_boats, only: [:edit, :update, :show, :destroy, :rent, :confirm_rental ]
+  before_action :authorize_admin, only: [:new, :create, :edit, :update, :destroy]
+
 
   def index
     @boats = Boat.includes(photo_attachment: :blob)
@@ -51,7 +53,14 @@ class BoatsController < ApplicationController
   end
 
   private
-
+  
+  def authorize_admin
+    unless current_user&.admin?
+      flash[:alert] = "Only admin users can perform this action."
+      redirect_to root_path
+    end
+  end
+  
   def set_boats
     @boat = Boat.find(params[:id])
   end

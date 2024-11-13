@@ -1,5 +1,7 @@
 <h1 class="menu-heading">Fast Food Menu</h1>
-<%= link_to 'Add New Food Item', new_food_item_path, class: 'btn btn-primary add-food-item-btn' %>
+<% if current_user&.admin? %>
+  <%= link_to 'Add New Food Item', new_food_item_path, class: 'btn btn-primary add-food-item-btn' %>
+<% end %>
 <div class="menu-container">
   <% @food_items.each do |food_item| %>
     <div class="menu-item">
@@ -19,11 +21,13 @@
       <!-- Action Buttons -->
       <div class="action-buttons">
         <%= button_to 'Order', new_order_path(food_item_ids: [food_item.id]), method: :get, class: 'btn order-button' %>
-        <%= link_to edit_food_item_path(food_item), class: 'btn edit-button' do %>
-          <i class="fas fa-edit"></i> Edit
-        <% end %>
-        <%= link_to food_item_path(food_item), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn delete-button' do %>
-          <i class="fas fa-trash-alt"></i> Delete
+        <% if current_user&.admin? %>
+          <%= link_to edit_food_item_path(food_item), class: 'btn edit-button' do %>
+            <i class="fas fa-edit"></i> Edit
+          <% end %>
+          <%= link_to food_item_path(food_item), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn delete-button' do %>
+            <i class="fas fa-trash-alt"></i> Delete
+          <% end %>
         <% end %>
       </div>
     </div>

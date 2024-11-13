@@ -1,5 +1,6 @@
 class CarsController < ApplicationController
   before_action :set_cars, only: [:edit, :update, :destroy, :show, :book]
+  before_action :authorize_admin, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @cars = Car.where(available: true).order(created_at: :desc) # Show only available cars
@@ -47,6 +48,13 @@ class CarsController < ApplicationController
   end  
 
   private 
+
+  def authorize_admin
+    unless current_user&.admin?
+      flash[:alert] = "Only admin users can perform this action."
+      redirect_to root_path
+    end
+  end
 
   def set_cars
     @car = Car.find(params[:id])

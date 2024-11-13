@@ -25,7 +25,9 @@
       <div class="bravo-list-item">
         <div class="d-flex justify-content-between align-items-center mb-4 topbar-search">
           <h3 class="font-size-21 mx-3 fw-bold mb-0 text-lh-1 result-count"> <%= @cars.count %> Cars found </h3>
-          <%= link_to "Add new car", new_car_path, class: 'btn btn-primary' %>
+          <% if current_user&.admin? %>
+             <%= link_to "Add new car", new_car_path, class: 'btn btn-primary' %>
+          <% end %>
         </div>
 
         <div class="row">

@@ -52,7 +52,9 @@
         <h3 class="font-size-21 mx-3 fw-bold mb-0 text-lh-1 result-count" style="font-family: 'Playfair Display', serif; font-size: 2rem; color: #2c3e50;">
           <%= @flights.count %> Exclusive Flights Found
         </h3>
-        <%= link_to 'Add new flight', new_flight_path, class: 'btn btn-primary mt-2 mb-2' %>
+        <% if current_user&.admin? %>
+          <%= link_to 'Add new flight', new_flight_path, class: 'btn btn-primary mt-2 mb-2' %>
+        <% end %>
       </div>
 
       <div class="row gx-1"> <!-- Slight gap for separation -->
