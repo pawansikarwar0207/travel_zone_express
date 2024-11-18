@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'profiles/show'
   get 'rewards/index'
   get 'dashboard/index'
   get 'flights/index'
@@ -46,4 +47,5 @@ Rails.application.routes.draw do
   resources :orders, only: [:new, :create, :show]
   resources :orders, only: [:index, :show, :update]
   resources :rewards, only: [:index]
+  get '/profile', to: 'profiles#show', as: 'user_profile'
 end

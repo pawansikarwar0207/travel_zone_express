@@ -1,0 +1,129 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <i class="fa fa-user-circle user-avatar-icon"></i>
+    <h2>Welcome, <%= current_user.email %></h2>
+  </div>
+
+  <!-- Rewards Section -->
+  <div class="profile-section rewards">
+    <h3>🏆 Rewards</h3>
+    <p>Current Points: <strong><%= current_user.reward&.current_points || 0 %></strong></p>
+    <p>Recent Achievements: <strong>3 Achievements</strong></p>
+  </div>
+
+  <!-- Wallet Section -->
+  <div class="profile-section wallet">
+    <h3>💰 Wallet</h3>
+    <p>Balance: <strong>$100</strong></p>
+    <p>Recent Transactions: <strong>2 transactions</strong></p>
+  </div>
+
+  <!-- Basket Section -->
+  <div class="profile-section basket">
+    <h3>🛒 Basket</h3>
+    <p>Items in Basket: <strong>5 items</strong></p>
+    <a href="#" class="btn">View Basket</a>
+  </div>
+
+  <!-- Card Section -->
+  <div class="profile-section card">
+    <h3>💳 Saved Cards</h3>
+    <p>Card: <strong>**** **** **** 1234</strong></p>
+    <a href="#" class="btn">Manage Cards</a>
+  </div>
+
+  <!-- Favorite Locations Section -->
+  <div class="profile-section favorites">
+    <h3>📍 Favorite Locations</h3>
+    <ul>
+      <li>Paris, France</li>
+      <li>New York, USA</li>
+    </ul>
+  </div>
+
+  <!-- Language Section -->
+  <div class="profile-section language">
+    <h3>🌐 Preferred Language</h3>
+    <p>Current Language: <strong>English</strong></p>
+    <a href="#" class="btn">Change Language</a>
+  </div>
+
+  <!-- Support Section -->
+  <div class="profile-section support">
+    <h3>🛠️ Support</h3>
+    <a href="#">Contact Support</a>
+  </div>
+
+  <!-- Logout Section -->
+  <div class="profile-section logout">
+    <a href="<%= destroy_user_session_path %>" data-method="delete" class="btn logout-btn">Logout</a>
+  </div>
+</div>
+<style>
+body {
+  background: #1a1a2e;
+  color: #e0e0e0;
+  font-family: 'Arial', sans-serif;
+}
+
+.profile-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #0f0f1e;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  border: 2px solid #ffd700;
+}
+
+h2 {
+  color: #ffd700;
+}
+
+.profile-section {
+  background: #20204a;
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.profile-section h3 {
+  color: #ffd700;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 12px;
+  background: #ffd700;
+  color: #1a1a2e;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.logout-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 12px;
+  background: #e63946;
+  color: white;
+  margin-top: 20px;
+}
+.user-avatar-icon {
+  font-size: 100px;
+  color: #555;
+}
+</style>
