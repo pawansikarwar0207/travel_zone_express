@@ -281,3 +281,8 @@ FoodItem.create([
 ])
 
 User.create(email: 'admin@example.com', password: 'password', admin: true) unless User.exists?(email: 'admin@example.com')
+User.create(email: 'user@example.com', password: 'password')
+
+User.all.each do |user|
+  Reward.create(user: user, current_points: rand(100..1000))
+end

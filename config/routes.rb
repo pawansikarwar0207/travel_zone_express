@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'rewards/index'
   get 'dashboard/index'
   get 'flights/index'
   get 'flights/show'
@@ -44,4 +45,5 @@ Rails.application.routes.draw do
   resources :food_items
   resources :orders, only: [:new, :create, :show]
   resources :orders, only: [:index, :show, :update]
+  resources :rewards, only: [:index]
 end

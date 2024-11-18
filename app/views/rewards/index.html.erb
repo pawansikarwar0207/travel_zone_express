@@ -1,0 +1,181 @@
+<div class="rewards-container">
+  <h1 class="dashboard-title">🏆 Luxurious Rewards Dashboard</h1>
+
+  <!-- Points Section -->
+  <div class="points-container">
+    <h2>Your Current Points: <span class="points"><%= @current_points %></span></h2>
+  </div>
+
+  <!-- Quests Section -->
+  <div class="quests-container">
+    <h3>✨ Daily Quest</h3>
+    <div class="quest-card daily-quest">
+      <p>Quest: <strong><%= @daily_quest[:title] %></strong></p>
+      <p>Status: <span class="quest-status"><%= @daily_quest[:status] %></span></p>
+      <p>Points: <span class="quest-points"><%= @daily_quest[:points] %> pts</span></p>
+    </div>
+
+    <h3>🌟 Weekly Quest</h3>
+    <div class="quest-card weekly-quest">
+      <p>Quest: <strong><%= @weekly_quest[:title] %></strong></p>
+      <p>Status: <span class="quest-status"><%= @weekly_quest[:status] %></span></p>
+      <p>Points: <span class="quest-points"><%= @weekly_quest[:points] %> pts</span></p>
+    </div>
+
+    <h3>💎 Monthly Quest</h3>
+    <div class="quest-card monthly-quest">
+      <p>Quest: <strong><%= @monthly_quest[:title] %></strong></p>
+      <p>Status: <span class="quest-status"><%= @monthly_quest[:status] %></span></p>
+      <p>Points: <span class="quest-points"><%= @monthly_quest[:points] %> pts</span></p>
+    </div>
+  </div>
+
+  <!-- Dashboard Section -->
+  <div class="dashboard-container">
+    <h3>📊 Quest Status Dashboard</h3>
+
+    <div class="status ongoing">
+      <h4>🚀 Ongoing Quests</h4>
+      <% @dashboard[:ongoing].each do |quest| %>
+        <p>🔵 <%= quest[:title] %> - <%= quest[:points] %> pts</p>
+      <% end %>
+    </div>
+
+    <div class="status successful">
+      <h4>🏆 Successful Quests</h4>
+      <% @dashboard[:successful].each do |quest| %>
+        <p>🟢 <%= quest[:title] %> - <%= quest[:points] %> pts</p>
+      <% end %>
+    </div>
+
+    <div class="status failed">
+      <h4>❌ Failed Quests</h4>
+      <% @dashboard[:failed].each do |quest| %>
+        <p>🔴 <%= quest[:title] %> - <%= quest[:points] %> pts</p>
+      <% end %>
+    </div>
+  </div>
+</div>
+<style>
+  /* Luxurious Rewards Dashboard Styling */
+  body {
+    background: radial-gradient(circle, #1c1c28, #12121a);
+    color: #e0e0e0;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .rewards-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 40px;
+    background: linear-gradient(145deg, #1e1e2f, #2a2a3e);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    border: 1px solid #3a3a55;
+  }
+
+  .dashboard-title {
+    text-align: center;
+    font-size: 2.8em;
+    color: #ffd700; /* Gold */
+    margin-bottom: 30px;
+    text-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
+  }
+
+  .points-container {
+    text-align: center;
+    background: linear-gradient(90deg, #3a3a55, #5a5a7f);
+    padding: 20px;
+    border-radius: 15px;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    margin-bottom: 40px;
+  }
+
+  .points {
+    font-size: 2em;
+    color: #ffd700;
+  }
+
+  .quests-container h3 {
+    color: #ffb400;
+    margin-top: 40px;
+  }
+
+  .quest-card {
+    background: rgba(20, 20, 35, 0.9);
+    border: 1px solid #ffd700;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 15px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    transition: transform 0.2s, background 0.3s;
+  }
+
+  .quest-card:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #33334d, #292940);
+  }
+
+  .quest-card p {
+    margin: 8px 0;
+    font-size: 1.2em;
+  }
+
+  .quest-status {
+    color: #ff4500;
+    font-weight: bold;
+  }
+
+  .quest-points {
+    color: #ffd700;
+    font-weight: bold;
+  }
+
+  .dashboard-container {
+    margin-top: 50px;
+  }
+
+  .status {
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .ongoing {
+    background: rgba(58, 58, 85, 0.2);
+  }
+
+  .successful {
+    background: rgba(50, 200, 50, 0.15);
+  }
+
+  .failed {
+    background: rgba(200, 50, 50, 0.15);
+  }
+
+  .status h4 {
+    color: #ddd;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+  }
+
+  .status p {
+    font-size: 1.2em;
+    padding: 5px 0;
+  }
+
+  .status .successful p {
+    color: #32cd32;
+  }
+
+  .status .failed p {
+    color: #ff6347;
+  }
+
+  .status .ongoing p {
+    color: #1e90ff;
+  }
+</style>

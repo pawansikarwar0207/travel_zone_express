@@ -8,4 +8,5 @@ class User < ApplicationRecord
     def admin?
       self.admin
     end
+    has_one :reward, dependent: :destroy
 end
