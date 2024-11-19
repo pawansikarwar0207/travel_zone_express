@@ -1,0 +1,53 @@
+<div style="max-width: 1200px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif;">
+  <h1 style="text-align: center; color: #003366; font-size: 2em; margin-bottom: 20px;">Choose Payment Method</h1>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between;">
+    <!-- Payment Option: Zone Express Wallet -->
+    <div class="payment-option" style="flex: 1 1 45%; padding: 20px; background-color: #f9fafb; border-radius: 10px; text-align: center; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);">
+      <i class="fas fa-wallet" style="font-size: 50px; color: #007bff; margin-bottom: 10px;"></i>
+      <h3>Zone Express Wallet</h3>
+      <p>Use your wallet balance to complete the payment.</p>
+      <%= button_to "Pay with Wallet", payments_path(method: 'wallet'), method: :post, class: 'btn btn-primary' %>
+    </div>
+
+    <!-- Payment Option: Add Card -->
+    <div class="payment-option" style="flex: 1 1 45%; padding: 20px; background-color: #f9fafb; border-radius: 10px; text-align: center; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);">
+      <i class="fas fa-credit-card" style="font-size: 50px; color: #007bff; margin-bottom: 10px;"></i>
+      <h3>Add Card</h3>
+      <p>Pay securely using your credit or debit card.</p>
+      <%= link_to "Add Card", new_card_path, class: 'btn btn-primary' %>
+    </div>
+
+    <!-- Payment Option: Scan to Pay -->
+    <div class="payment-option" style="flex: 1 1 45%; padding: 20px; background-color: #f9fafb; border-radius: 10px; text-align: center; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);">
+      <i class="fas fa-qrcode" style="font-size: 50px; color: #007bff; margin-bottom: 10px;"></i>
+      <h3>Scan to Pay</h3>
+      <p>Scan the QR code to complete the payment.</p>
+      <%= link_to "Scan Now", scan_payments_path, class: 'btn btn-primary' %>
+    </div>
+
+    <!-- Payment Option: E-Wallet -->
+    <div class="payment-option" style="flex: 1 1 45%; padding: 20px; background-color: #f9fafb; border-radius: 10px; text-align: center; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);">
+      <i class="fas fa-mobile-alt" style="font-size: 50px; color: #007bff; margin-bottom: 10px;"></i>
+      <h3>E-Wallet</h3>
+      <p>Use your preferred e-wallet for the transaction.</p>
+      <%= link_to "Pay with E-Wallet", ewallet_payments_path, class: 'btn btn-primary' %>
+    </div>
+
+    <!-- Payment Option: Pay Crypto -->
+    <div class="payment-option" style="flex: 1 1 45%; padding: 20px; background-color: #f9fafb; border-radius: 10px; text-align: center; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);">
+      <i class="fab fa-bitcoin" style="font-size: 50px; color: #007bff; margin-bottom: 10px;"></i>
+      <h3>Pay Crypto</h3>
+      <p>Complete the payment using cryptocurrency.</p>
+      <%= link_to "Pay with Crypto", crypto_payments_path, class: 'btn btn-primary' %>
+    </div>
+
+    <!-- Payment Option: Send to Bank (Global Wallet) -->
+    <div class="payment-option" style="flex: 1 1 45%; padding: 20px; background-color: #f9fafb; border-radius: 10px; text-align: center; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);">
+      <i class="fas fa-university" style="font-size: 50px; color: #007bff; margin-bottom: 10px;"></i>
+      <h3>Send to Bank</h3>
+      <p>Transfer funds directly to your global wallet.</p>
+      <%= link_to "Send Now", bank_transfer_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>

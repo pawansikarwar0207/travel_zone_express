@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'payment/index'
   get 'profiles/show'
   get 'rewards/index'
   get 'dashboard/index'
@@ -48,4 +49,13 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :show, :update]
   resources :rewards, only: [:index]
   get '/profile', to: 'profiles#show', as: 'user_profile'
+    # Payments Routes
+    resources :payments, only: [:new, :create]
+  
+    get 'scan_payments', to: 'payments#scan'
+    get 'ewallet_payments', to: 'payments#ewallet'
+    get 'crypto_payments', to: 'payments#crypto'
+    get 'bank_transfer', to: 'payments#bank_transfer' 
+    
+    get 'cards/new', to: 'cards#new', as: 'new_card'
 end
