@@ -58,4 +58,7 @@ Rails.application.routes.draw do
     get 'bank_transfer', to: 'payments#bank_transfer' 
     
     get 'cards/new', to: 'cards#new', as: 'new_card'
+    namespace :admin do
+      resources :users
+    end    
 end
