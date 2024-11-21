@@ -1,0 +1,191 @@
+<div class="container my-5">
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    h1, h2 {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Card Styling */
+    .card {
+      background: linear-gradient(135deg, #ffffff, #f7f7f7);
+      border-radius: 12px;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Form Styles */
+    .form-control {
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .form-label {
+      font-weight: bold;
+      color: #495057;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      box-shadow: 0 4px 8px rgba(0, 91, 187, 0.4);
+    }
+
+    /* Table Styling */
+    .table {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .table thead {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .table-hover tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Action Buttons */
+    .btn-outline-warning, .btn-outline-danger {
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline-warning:hover {
+      background-color: #ffc107;
+      color: #fff;
+    }
+
+    .btn-outline-danger:hover {
+      background-color: #dc3545;
+      color: #fff;
+    }
+
+    /* Pagination */
+    .pagination {
+      justify-content: center;
+    }
+
+    .page-link {
+      border-radius: 50px;
+      padding: 8px 16px;
+    }
+
+    .page-link:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+  </style>
+
+  <!-- Form Section -->
+  <div class="card p-4 mb-5">
+    <h2 class="text-primary mb-4">Create User</h2>
+    <%= form_with model: @user, url: admin_users_path, local: true, class: "row g-3" do |f| %>
+      <div class="col-md-6">
+        <%= f.label :first_name, "First Name", class: "form-label" %>
+        <%= f.text_field :first_name, class: "form-control", placeholder: "Enter first name" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :middle_name, "Middle Name", class: "form-label" %>
+        <%= f.text_field :middle_name, class: "form-control", placeholder: "Enter middle name" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :last_name, "Last Name", class: "form-label" %>
+        <%= f.text_field :last_name, class: "form-control", placeholder: "Enter last name" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :suffix, class: "form-label" %>
+        <%= f.text_field :suffix, class: "form-control", placeholder: "Enter suffix" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :group, class: "form-label" %>
+        <%= f.text_field :group, class: "form-control", placeholder: "Enter group" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :status, class: "form-label" %>
+        <%= f.select :status, [['Active', 'active'], ['Inactive', 'inactive']], {}, class: "form-select" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :email, class: "form-label" %>
+        <%= f.email_field :email, class: "form-control", placeholder: "Enter email" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :temporary_password, "Temporary Password", class: "form-label" %>
+        <%= f.password_field :temporary_password, class: "form-control", placeholder: "Enter password" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :role, class: "form-label" %>
+        <%= f.select :role, [['User', 'user'], ['Admin', 'admin']], {}, class: "form-select" %>
+      </div>
+      <div class="col-12">
+        <%= f.submit "Create User", class: "btn btn-primary btn-lg w-100" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Users Table Section -->
+  <div class="card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="text-primary">All Users</h2>
+      <div class="input-group" style="max-width: 400px;">
+        <%= form_with url: new_admin_user_path, method: :get, local: true, class: "d-flex w-100" do %>
+          <%= search_field_tag :query, params[:query], placeholder: "Search users...", class: "form-control" %>
+          <button class="btn btn-outline-primary"><i class="fas fa-search"></i></button>
+        <% end %>
+      </div>
+    </div>
+
+    <table class="table table-hover">
+      <thead>
+        <tr class="text-center">
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.role.present? ? user.role.capitalize : 'Not Assigned' %></td>
+            <td><%= user.status.present? ? user.status.capitalize : 'Not Set' %></td>
+            <td class="text-center">
+              <div class="d-flex justify-content-center gap-2">
+                <%= link_to edit_admin_user_path(user), class: "btn btn-sm btn-outline-warning" do %>
+                  <i class="fas fa-edit"></i> Edit
+                <% end %>
+                <%= button_to admin_user_path(user), 
+                  method: :delete, 
+                  data: { turbo_confirm: "Are you sure?" }, 
+                  class: "btn btn-sm btn-outline-danger" do %>
+                  <i class="fas fa-trash-alt"></i> Delete
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="mt-4">
+      <%= paginate @users %>
+    </div>
+  </div>
+</div>
