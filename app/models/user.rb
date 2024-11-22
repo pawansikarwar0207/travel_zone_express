@@ -9,4 +9,7 @@ class User < ApplicationRecord
       self.admin
     end
     has_one :reward, dependent: :destroy
+    def name
+      [first_name, middle_name, last_name].compact.join(" ").presence || "Unknown User"
+    end
 end

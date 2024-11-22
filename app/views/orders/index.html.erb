@@ -5,6 +5,9 @@
     <tr>
       <th>Order ID</th>
       <th>Date</th>
+      <% if current_user.admin? %>
+        <th>User</th>
+      <% end %>
       <th>Items</th>
       <th>Total Amount</th>
       <th>Status</th>
@@ -16,6 +19,12 @@
       <tr>
         <td><%= order.id %></td>
         <td><%= order.created_at.strftime("%d-%m-%Y %H:%M") %></td>
+        <% if current_user.admin? %>
+          <td>
+            <strong><%= order.user.name %></strong><br>
+            <em><%= order.user.email %></em>
+          </td>
+        <% end %>
         <td>
           <ul class="order-items-list">
             <% order.order_items.each do |order_item| %>
@@ -30,7 +39,7 @@
         <td><%= order.status.present? ? order.status.titleize : "Pending" %></td>
         <td class="actions-column">
           <%= link_to "View", order_path(order), class: "view-link" %>
-          <% if order.status != "Delivered" %>
+          <% if order.status != "Delivered" && current_user.admin? %>
             <%= form_with url: order_path(order), method: :patch, local: true do |form| %>
               <%= form.hidden_field :status, value: "Delivered", name: "order[status]" %>
               <%= form.submit "Mark as Delivered", class: "delivered-link" %>
