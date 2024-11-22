@@ -1,8 +1,15 @@
   class OrdersController < ApplicationController
       before_action :authenticate_user!
-      
+      before_action :set_order, only: [:show, :update]
+
       def index
-        @orders = Order.includes(:food_items).order(created_at: :desc)
+        if current_user.admin?
+          # Admin user: Show all orders
+          @orders = Order.includes(:order_items, :user).all
+        else
+          # Normal user: Show only their own orders
+          @orders = current_user.orders.includes(:order_items)
+        end
       end
 
       def new
@@ -37,8 +44,9 @@
         end
       end
     
+      
       def show
-        @order = current_user.orders.find(params[:id])
+        # @order will be set by `set_order` method
       end
     
       def update
@@ -68,6 +76,20 @@
           total += food_item.price * quantity
         end
         total
+      end
+
+      def set_order
+        if current_user.admin?
+          # Admin can access any order
+          @order = Order.find(params[:id])
+        else
+          # Regular users can only access their own orders
+          @order = current_user.orders.find(params[:id])
+        end
+      rescue ActiveRecord::RecordNotFound
+        # Handle case where the order does not exist or is not accessible
+        flash[:alert] = "Order not found."
+        redirect_to orders_path
       end
 
       def estimated_delivery_time(order)
