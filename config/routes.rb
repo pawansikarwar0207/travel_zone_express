@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'settings/index'
   get 'payment/index'
   get 'profiles/show'
   get 'rewards/index'
@@ -61,4 +62,7 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :users
     end    
+    get '/settings/:module', to: 'settings#edit', as: :edit_setting
+    post '/settings/:module/update', to: 'settings#update', as: :update_setting
+    resources :settings, only: [:edit, :update]
 end
