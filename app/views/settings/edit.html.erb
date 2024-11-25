@@ -1,0 +1,13 @@
+<h1><%= @module_display_name %> Settings</h1>
+
+<%= form_with url: setting_path(@module), method: :patch do %>
+  <p>Disable <%= @module_display_name %> module?</p>
+  <label>
+    <%= radio_button_tag :disable, 'true', @setting.value == 'true' %> Yes, please disable it
+  </label>
+  <label>
+    <%= radio_button_tag :disable, 'false', @setting.value != 'true' %> No, keep it enabled
+  </label>
+  <br><br>
+  <%= submit_tag "Save Settings", class: "btn btn-primary" %>
+<% end %>

@@ -15,35 +15,159 @@
           <i class="fas fa-map-marker-alt" style="margin-right: 12px;"></i> Locations
         </a>
       </li>
-      <li style="margin-bottom: 15px;">
-        <a href="/cars" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
-          <i class="fas fa-car" style="margin-right: 12px;"></i> Cars
-        </a>
-      </li>
-      <li style="margin-bottom: 15px;">
-        <a href="/flights" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
-          <i class="fas fa-plane" style="margin-right: 12px;"></i> Flights
-        </a>
-      </li>
-      <li style="margin-bottom: 15px;">
-        <a href="/tours" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
-          <i class="fas fa-route" style="margin-right: 12px;"></i> Tours
-        </a>
-      </li>
-      <li style="margin-bottom: 15px;">
-        <a href="/hotels" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
-          <i class="fas fa-hotel" style="margin-right: 12px;"></i> Hotels
-        </a>
-      </li>
-      <li style="margin-bottom: 15px;">
-        <a href="/events" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
-          <i class="fas fa-calendar-alt" style="margin-right: 12px;"></i> Events
-        </a>
-      </li>
+      <ul style="list-style: none; padding: 0; margin: 0;">
+        <% unless @disabled_modules.include?('car') %>
+            <!-- Cars Section -->
+            <li style="margin-bottom: 15px; position: relative;">
+              <div style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
+                <a href="/cars" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
+                  <span>
+                    <i class="fas fa-car" style="margin-right: 12px;"></i> Cars
+                  </span>
+                </a>
+                <i class="fas fa-chevron-down" style="cursor: pointer;" onclick="toggleDropdown(event, this)"></i>
+              </div>
+              <ul style="list-style: none; padding-left: 25px; margin-top: 10px; display: none;">
+                <li>
+                  <a href="/cars" style="color: #e3f2fd; text-decoration: none; font-size: 0.9em;">
+                    All Cars
+                  </a>
+                </li>
+                <li>
+                  <a href="/cars/new" style="color: #e3f2fd; text-decoration: none; font-size: 0.9em;">
+                    Add New Car
+                  </a>
+                </li>
+              </ul>
+            </li>
+        <% end %>
+        <!-- Repeat the same for Flights, Tours, Hotels, and Events -->
+
+        <!-- Flights Section -->
+        <% unless @disabled_modules.include?('flight') %>
+          <li style="margin-bottom: 15px; position: relative;">
+            <div style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
+              <a href="/flights" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
+                <span>
+                  <i class="fas fa-plane" style="margin-right: 12px;"></i> Flights
+                </span>
+              </a>
+              <i class="fas fa-chevron-down" style="cursor: pointer;" onclick="toggleDropdown(event, this)"></i>
+            </div>
+            <ul style="list-style: none; padding-left: 25px; margin-top: 10px; display: none;">
+              <li>
+                <a href="/flights" style="color: #e3f2fd; text-decoration: none; font-size: 0.9em;">
+                  All Flights
+                </a>
+              </li>
+              <li>
+                <a href="/flights/new" style="color: #e3f2fd; text-decoration: none; font-size: 0.9em;">
+                  Add New Flight
+                </a>
+              </li>
+            </ul>
+          </li>
+        <% end %>
+          <!-- Tours Section -->
+        <% unless @disabled_modules.include?('tour') %>
+          <li style="margin-bottom: 15px; position: relative;">
+            <div style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
+              <a href="/tours" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
+                <span>
+                  <i class="fas fa-route" style="margin-right: 12px;"></i> Tours
+                </span>
+              </a>
+              <i class="fas fa-chevron-down" style="cursor: pointer;" onclick="toggleDropdown(event, this)"></i>
+            </div>
+            <ul style="list-style: none; padding-left: 25px; margin-top: 10px; display: none;">
+              <li>
+                <a href="/tours" style="color: #e3f2fd; text-decoration: none; font-size: 0.9em;">
+                  All Tours
+                </a>
+              </li>
+              <li>
+                <a href="/tours/new" style="color: #e3f2fd; text-decoration: none; font-size: 0.9em;">
+                  Add New Tour
+                </a>
+              </li>
+            </ul>
+          </li>
+        <% end %>
+
+        <% unless @disabled_modules.include?('hotel') %>
+            <!-- Hotels Section -->
+            <li style="margin-bottom: 15px; position: relative;">
+              <div style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
+                <a href="/hotels" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
+                  <span>
+                    <i class="fas fa-hotel" style="margin-right: 12px;"></i> Hotels
+                  </span>
+                </a>
+                <i class="fas fa-chevron-down" style="cursor: pointer;" onclick="toggleDropdown(event, this)"></i>
+              </div>
+              <ul style="list-style: none; padding-left: 25px; margin-top: 10px; display: none;">
+                <li>
+                  <a href="/hotels" style="color: #e3f2fd; text-decoration: none; font-size: 0.9em;">
+                    All Hotels
+                  </a>
+                </li>
+                <li>
+                  <a href="/hotels/new" style="color: #e3f2fd; text-decoration: none; font-size: 0.9em;">
+                    Add New Hotel
+                  </a>
+                </li>
+              </ul>
+            </li>
+        <% end %>
+        <% unless @disabled_modules.include?('event') %>
+          <!-- Events Section -->
+          <li style="margin-bottom: 15px; position: relative;">
+            <div style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
+              <a href="/events" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
+                <span>
+                  <i class="fas fa-calendar-alt" style="margin-right: 12px;"></i> Events
+                </span>
+              </a>
+              <i class="fas fa-chevron-down" style="cursor: pointer;" onclick="toggleDropdown(event, this)"></i>
+            </div>
+            <ul style="list-style: none; padding-left: 25px; margin-top: 10px; display: none;">
+              <li>
+                <a href="/events" style="color: #e3f2fd; text-decoration: none; font-size: 0.9em;">
+                  All Events
+                </a>
+              </li>
+              <li>
+                <a href="/events/new" style="color: #e3f2fd; text-decoration: none; font-size: 0.9em;">
+                  Add New Event
+                </a>
+              </li>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+
+
       <li style="margin-bottom: 15px;">
         <a href="<%= new_admin_user_path %>" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
           <i class="fas fa-users" style="margin-right: 12px;"></i> Admin Users
         </a>
+      </li>
+      <li style="margin-bottom: 15px; position: relative;">
+        <div style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
+          <a href="javascript:void(0);" style="color: #e3f2fd; text-decoration: none; font-size: 1.1em;">
+            <span>
+              <i class="fas fa-cog" style="margin-right: 12px;"></i> Settings
+            </span>
+          </a>
+          <i class="fas fa-chevron-down" style="cursor: pointer;" onclick="toggleDropdown(event, this)"></i>
+        </div>
+        <ul style="list-style: none; padding-left: 25px; margin-top: 10px; display: none;">
+          <li><a href="<%= edit_setting_path('tour') %>" style="color: #e3f2fd; text-decoration: none; font-size: 0.9em;">Tour Settings</a></li>
+          <li><a href="<%= edit_setting_path('flight') %>" style="color: #e3f2fd; text-decoration: none; font-size: 0.9em;">Flight Settings</a></li>
+          <li><a href="<%= edit_setting_path('car') %>" style="color: #e3f2fd; text-decoration: none; font-size: 0.9em;">Car Settings</a></li>
+          <li><a href="<%= edit_setting_path('hotel') %>" style="color: #e3f2fd; text-decoration: none; font-size: 0.9em;">Hotel Settings</a></li>
+          <li><a href="<%= edit_setting_path('event') %>" style="color: #e3f2fd; text-decoration: none; font-size: 0.9em;">Event Settings</a></li>
+        </ul>
       </li>
     </ul>
   </div>
@@ -159,4 +283,36 @@
     });
   });
 </script>
+<script>
+  function toggleDropdown(event, icon) {
+    // Prevent the default navigation behavior for the arrow click
+    event.stopPropagation();
 
+    const submenu = icon.parentElement.nextElementSibling;
+    if (submenu.style.display === "none" || submenu.style.display === "") {
+      submenu.style.display = "block";
+      icon.classList.remove("fa-chevron-down");
+      icon.classList.add("fa-chevron-up");
+    } else {
+      submenu.style.display = "none";
+      icon.classList.remove("fa-chevron-up");
+      icon.classList.add("fa-chevron-down");
+    }
+  }
+</script>
+<style>
+  ul > li > ul {
+    margin-top: 5px;
+  }
+
+  ul > li > ul li a {
+    color: #cfd8dc;
+    font-size: 0.9em;
+    text-decoration: none;
+  }
+
+  ul > li > ul li a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+</style>
